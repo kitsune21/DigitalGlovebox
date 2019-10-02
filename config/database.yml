@@ -24,6 +24,8 @@ default: &default
 development:
   <<: *default
   database: digital_glovebox_development
+  username: postgres
+  password: postgres
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -58,6 +60,8 @@ development:
 test:
   <<: *default
   database: digital_glovebox_test
+  username: postgres
+  password: postgres
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -81,5 +85,5 @@ test:
 production:
   <<: *default
   database: digital_glovebox_production
-  username: digital_glovebox
-  password: <%= ENV['DIGITAL_GLOVEBOX_DATABASE_PASSWORD'] %>
+  username: postgres
+  password: postgres

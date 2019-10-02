@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  year: MyString
+  make: MyString
+  model: MyString
+  mileage: 
+  vin: MyString
+  color: MyString
+  license_plate: MyString
+  user: one
+
+two:
+  year: MyString
+  make: MyString
+  model: MyString
+  mileage: 
+  vin: MyString
+  color: MyString
+  license_plate: MyString
+  user: two
