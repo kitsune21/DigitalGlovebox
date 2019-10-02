@@ -4,7 +4,7 @@ class CreateCars < ActiveRecord::Migration[6.0]
       t.string :year
       t.string :make
       t.string :model
-      t.int :mileage
+      t.integer :mileage
       t.string :vin
       t.string :color
       t.string :license_plate

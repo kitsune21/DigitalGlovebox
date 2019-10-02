@@ -10,10 +10,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_02_021831) do
+ActiveRecord::Schema.define(version: 2019_10_02_024126) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cars", force: :cascade do |t|
+    t.string "year"
+    t.string "make"
+    t.string "model"
+    t.integer "mileage"
+    t.string "vin"
+    t.string "color"
+    t.string "license_plate"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_cars_on_user_id"
+  end
+
+  create_table "document_pages", force: :cascade do |t|
+    t.bigint "document_id", null: false
+    t.string "front_img"
+    t.string "back_img"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["document_id"], name: "index_document_pages_on_document_id"
+  end
+
+  create_table "document_types", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_document_types_on_user_id"
+  end
+
+  create_table "documents", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "document_type_id", null: false
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["document_type_id"], name: "index_documents_on_document_type_id"
+    t.index ["user_id"], name: "index_documents_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -45,4 +86,9 @@ ActiveRecord::Schema.define(version: 2019_10_02_021831) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "cars", "users"
+  add_foreign_key "document_pages", "documents"
+  add_foreign_key "document_types", "users"
+  add_foreign_key "documents", "document_types"
+  add_foreign_key "documents", "users"
 end
