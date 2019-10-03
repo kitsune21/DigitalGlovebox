@@ -13,7 +13,7 @@ class Api::DocumentsController < ApplicationController
 
 def update
   @document = Document.find(params[:id])
-  if @document.update
+  if @document.update(document_params)
     render json: @document
   else
     render json: {errors: @document_errors}, status: :unprocessable_entry
