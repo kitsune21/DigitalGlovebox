@@ -28,6 +28,6 @@ end
   private
 
   def document_params
-    params.require(:document).permit(:user_id, :document_id, :name)
+    params.require(:document).permit(:name)
   end
 end

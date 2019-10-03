@@ -28,6 +28,6 @@ class Api::DocumentTypesController < ApplicationController
   private
     def documentType_params
       # { documentType: {title: '', body: ''} }
-    params.require(:documentType).permit(:name)
+    params.require(:document_type).permit(:name)
   end
 end
