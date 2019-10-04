@@ -1,3 +1,4 @@
+
 name = ['Vehicle']
 
 30.times do
@@ -28,5 +29,3 @@ user = User.create(
 end
 
 puts 'Data Seeded'
-
-
