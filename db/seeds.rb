@@ -1,5 +1,5 @@
 
-name = ['Vehicle']
+name = %w[Insurance Manual License other]
 
 30.times do
   user = User.create(
@@ -15,16 +15,18 @@ name = ['Vehicle']
     vin: Faker::Vehicle.vin
     color: Faker::Vehicle.color
     license_plate: Faker::vehicle.license_plate
-    user_id: user.id 
+    user_id: user.id
   )
-
+  document_type = DocumentType.create(
+    name: name.sample,
+    user_id: user.id
+  )
+  Document.create(
+    name: Faker::Superhero.name,
+    user_id: user.id,
+    document_type_id: document_type.id
+  )
 end
 
-user = User.create(
-  email: test.test@tester.com,
-  first_name: Faker::Name.first_name,
-  password: 'password',
-)
-end
 
 puts 'Data Seeded'
