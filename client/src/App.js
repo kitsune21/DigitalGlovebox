@@ -6,16 +6,20 @@ import Login from './Components/Auth/Login';
 import Register from './Components/Auth/Register';
 import NoMatch from './Components/Shared/NoMatch';
 
+import FetchUser from './Components/Auth/FetchUser'
+
 const App = () => (
   <>
     <div>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/register" component={Register} />
-        
-        <Route component={NoMatch} />
-      </Switch>
+      <FetchUser>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
+          
+          <Route component={NoMatch} />
+        </Switch>
+      </FetchUser>
     </div>
   </>
 )
