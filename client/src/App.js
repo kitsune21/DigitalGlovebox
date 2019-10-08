@@ -1,6 +1,8 @@
 import React from 'react';
 import { Switch, Route, } from 'react-router-dom';
 
+import Navbar from './Components/Shared/Navbar';
+
 import Home from './Components/Shared/Home';
 import Login from './Components/Auth/Login';
 import Register from './Components/Auth/Register';
@@ -12,6 +14,7 @@ const App = () => (
   <>
     <div>
       <FetchUser>
+        <Navbar />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
