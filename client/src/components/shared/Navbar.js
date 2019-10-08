@@ -8,7 +8,7 @@ class Navbar extends React.Component{
     return (
       <div>
         <ul>
-          <li>Dashboard</li>
+          <li><Link to='/'>Dashboard</Link></li>
           <li>Documents</li>
           <li>Contact Us</li>
           {
