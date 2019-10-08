@@ -1,4 +1,3 @@
-
 name = %w[Insurance Manual License other]
 
 30.times do
@@ -30,3 +29,5 @@ end
 
 
 puts 'Data Seeded'
+
+
