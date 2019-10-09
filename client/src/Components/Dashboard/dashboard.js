@@ -8,8 +8,7 @@ class Dashboard extends Component {
 
 
   componentDidMount() {
-    console.log(this.props);
-    const { user } = this.props;
+    const { auth: { user } } = this.props;
     axios.get(`/api/${user.id}/cars`)
       .then( res => {
         this.setState({ cars: res.data, });
