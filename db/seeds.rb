@@ -1,4 +1,20 @@
 name = %w[Insurance Manual License other]
+default = User.create(
+  email: 'user@email.com',
+  name: 'Will',
+  password: 'password'
+)
+
+default_car = Car.create(
+    year: Faker::Vehicle.year,
+    make: Faker::Vehicle.make,
+    model: Faker::Vehicle.model,
+    mileage: Faker::Vehicle.mileage,
+    vin: Faker::Vehicle.vin,
+    color: Faker::Vehicle.color,
+    license_plate: Faker::Vehicle.license_plate,
+    user_id: default.id
+  )
 
 30.times do
   user = User.create(
