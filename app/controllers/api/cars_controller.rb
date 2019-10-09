@@ -15,7 +15,7 @@ def create
 end
 
 def update
-  @car = @usesr.cars.find(params[:id])
+  @car = @user.cars.find(params[:id])
   if @car.update(car_params)
     render json: @car
   else
