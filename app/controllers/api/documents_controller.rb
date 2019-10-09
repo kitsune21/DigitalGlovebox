@@ -1,22 +1,26 @@
 class Api::DocumentsController < ApplicationController
+  before_action :set_user
+
   def index
-    render json: Document.all
+    render json: @user.documents.all
   end
 
   def create
-    @document = Document.new(document_params)
+    @document = @user.documents.new(document_params)
     if @document.save
       render json: @document
     else
       render json: {errors: @document_errors}, status: :unprocessable_entry
+    end
   end
 
 def update
-  @document = Document.find(params[:id])
+  @document = @user.documents.find(params[:id])
   if @document.update(document_params)
     render json: @document
   else
     render json: {errors: @document_errors}, status: :unprocessable_entry
+  end
 end
 
 def destroy
@@ -26,6 +30,10 @@ end
 
 
   private
+
+  def set_user
+    @user = User.find(params[:user_id])
+  end
 
   def document_params
     params.require(:document).permit(:name)

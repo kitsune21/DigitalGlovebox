@@ -9,4 +9,5 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   has_many :cars
+  has_many :documents
 end
