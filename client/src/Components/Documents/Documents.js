@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { AuthConsumer } from '../../Providers/AuthProvider';
 import { withRouter, } from 'react-router-dom';
+import DocumentList from './DocumentList'
 
 
 class Documents extends Component {
@@ -22,11 +23,7 @@ class Documents extends Component {
 	render() {
 		return(
       <div>
-        {
-          this.state.documents.map(doc =>
-            <p>{ doc.name }</p>
-          )
-        }
+        <DocumentList documents={this.state.documents}/>
       </div>
     )
 	}
