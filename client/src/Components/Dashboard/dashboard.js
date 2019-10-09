@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
+import { withRouter, } from 'react-router-dom'; 
 import axios from 'axios';
+import { AuthConsumer } from '../../Providers/AuthProvider';
 
 class Dashboard extends Component {
-  state = { cars: {}};
+  state = { cars: []};
 
 
   componentDidMount() {
-    axios.get(`/api/${currentUser}/cars`)
+    console.log(this.props);
+    const { user } = this.props;
+    axios.get(`/api/${user.id}/cars`)
       .then( res => {
         this.setState({ cars: res.data, });
       })
@@ -16,11 +20,28 @@ class Dashboard extends Component {
   }
 
   render() {
-    return(
-
-    
-
-    )
+    const { cars } = this.state;
+      return (
+          <ol>
+           { cars.map( c =>
+               <li key={c.id}>{c.make} {c.model}></li>
+             )
+           }
+         </ol>
+       )
+     }
   }
 
+export class ConnectedDashboard extends React.Component {
+  render() {
+    return (
+      <AuthConsumer> 
+        { auth => 
+          <Dashboard { ...this.props } auth={auth} />
+        }
+      </AuthConsumer>
+    )
+  }
 }
+
+export default withRouter(ConnectedDashboard);
