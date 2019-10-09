@@ -3,7 +3,7 @@ import ConnectedDashboard from '../Dashboard/dashboard';
 class Home extends Component {
 
   componentDidMount() {
-    console.log(this.props)
+    
   }
 
   render(){ 

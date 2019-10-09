@@ -10,7 +10,7 @@ class Dashboard extends Component {
   componentDidMount() {
     const { auth: { user } } = this.props;
     if (user) {
-      axios.get(`/api/${user.id}/cars`)
+      axios.get(`/api/users/${user.id}/cars`)
       .then( res => {
         this.setState({ cars: res.data, });
       })
@@ -26,7 +26,7 @@ class Dashboard extends Component {
       return (
           <ol>
            { cars.map( c =>
-               <li key={c.id}>{c.make} {c.model}></li>
+               <li key={c.id}>{c.make} {c.model} {c.year}</li>
              )
            }
          </ol>
