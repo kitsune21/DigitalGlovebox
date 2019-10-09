@@ -9,13 +9,16 @@ class Dashboard extends Component {
 
   componentDidMount() {
     const { auth: { user } } = this.props;
-    axios.get(`/api/${user.id}/cars`)
+    if (user) {
+      axios.get(`/api/${user.id}/cars`)
       .then( res => {
         this.setState({ cars: res.data, });
       })
       .catch( err => {
         console.log(err);
       })
+    }
+    
   }
 
   render() {
