@@ -1,15 +1,13 @@
 import React from 'react';
 import { Switch, Route, } from 'react-router-dom';
-
 import Navbar from './Components/Shared/Navbar';
-
 import Home from './Components/Shared/Home';
 import Login from './Components/Auth/Login';
 import Register from './Components/Auth/Register';
 import NoMatch from './Components/Shared/NoMatch';
 import ConnectedDocuments from './Components/Documents/Documents';
-
 import FetchUser from './Components/Auth/FetchUser';
+
 
 const App = () => (
   <>
