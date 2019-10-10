@@ -12,7 +12,6 @@ class Home extends Component {
       <div>
         <h1>Digital Glovebox</h1>
         <ConnectedDashboard />
-        <ConnectedDocuments />
       </div>
     )
   }

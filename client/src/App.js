@@ -7,6 +7,7 @@ import Home from './Components/Shared/Home';
 import Login from './Components/Auth/Login';
 import Register from './Components/Auth/Register';
 import NoMatch from './Components/Shared/NoMatch';
+import ConnectedDocuments from './Components/Documents/Documents';
 
 import FetchUser from './Components/Auth/FetchUser';
 
@@ -19,6 +20,7 @@ const App = () => (
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/documents" component={ConnectedDocuments} />
           
           <Route component={NoMatch} />
         </Switch>
