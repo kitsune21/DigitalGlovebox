@@ -1,4 +1,5 @@
-name = %w[Insurance Manual License other]
+name = %w[Manual License other]
+type = ['Insurance', 'Registration', 'Service Record']
 default = User.create(
   email: 'user@email.com',
   name: 'Will',
@@ -15,6 +16,22 @@ default_car = Car.create(
     license_plate: Faker::Vehicle.license_plate,
     user_id: default.id
   )
+@type_ids = []
+for i in (0..2) do
+  dt = DocumentType.create(
+    name: type[i],
+    user_id: 1
+  )
+  @type_ids << dt.id
+end
+
+3.times do
+  document = Document.create(
+    name: Faker::Superhero.name,
+    user_id: 1,
+    document_type_id: @type_ids.sample
+  )
+end
 
 30.times do
   user = User.create(
@@ -36,14 +53,14 @@ default_car = Car.create(
     name: name.sample,
     user_id: user.id
   )
-  document = Document.create(
-    name: Faker::Superhero.name,
-    user_id: user.id,
-    document_type_id: document_type.id
-  )
+  3.times do
+    document = Document.create(
+      name: Faker::Superhero.name,
+      user_id: user.id,
+      document_type_id: @type_ids.sample
+    )
+  end
 end
 
 
 puts 'Data Seeded'
-
-

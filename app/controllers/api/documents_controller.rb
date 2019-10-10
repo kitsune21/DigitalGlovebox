@@ -2,7 +2,7 @@ class Api::DocumentsController < ApplicationController
   before_action :set_user
 
   def index
-    render json: @user.documents.all
+    render json: @user.documents.all.order("document_type_id ASC")
   end
 
   def create
