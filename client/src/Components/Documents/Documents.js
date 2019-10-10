@@ -6,7 +6,7 @@ import DocumentList from './DocumentList'
 
 
 class Documents extends Component {
-  state = {documents: []}
+  state = {documents: [], document_types: []}
 
   componentDidMount(){
     const { auth: { user } } = this.props
@@ -24,7 +24,7 @@ class Documents extends Component {
 		return(
       <div>
         <h2>My Documents</h2>
-        <DocumentList documents={this.state.documents}/>
+        <DocumentList document_types={this.state.document_types} documents={this.state.documents}/>
       </div>
     )
 	}
