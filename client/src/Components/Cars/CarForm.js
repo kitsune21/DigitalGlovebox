@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form } from 'semantic-ui-react';
+//import { Form } from 'semantic-ui-react';
 
 class CarForm extends Component {
  state = { name: '' }
@@ -27,18 +27,9 @@ class CarForm extends Component {
 
  render() {
    const { name } = this.state
-   return (
-     <Form onSubmit={this.handleSubmit}>
-       <Form.Input
-         required
-         placeholder='Car'
-         label='name'
-         name='name'
-         value={name}
-         onChange={this.handleChange}
-       />
-      </Form>
-    )
+      return(
+        <p>hi</p>
+      )
    }
   }
 

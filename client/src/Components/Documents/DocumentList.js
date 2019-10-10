@@ -9,7 +9,6 @@ class DocumentList extends Component {
   componentDidMount() {
     axios.get(`/api/users/1/document_types`)
     .then( res => {
-      console.log(res.data)
     this.setState({document_types: res.data})
   })
 
@@ -18,9 +17,9 @@ class DocumentList extends Component {
   renderDocTypes = () => {
     return(
       this.state.document_types.map( type =>
-        <div>
-        <h2>{type.name}</h2>
-        {this.renderDocs(type.id)}
+        <div key={type.id} >
+          <h2>{type.name}</h2>
+          {this.renderDocs(type.id).map( doc => <p key={doc.id}>{doc.name}</p>)}
         </div>
       )
     )
@@ -28,28 +27,20 @@ class DocumentList extends Component {
 
   renderDocs = (id) => {
     let myDocs = [];
-    this.props.documents.map( doc => {
+    this.props.documents.forEach( doc => {
       if(doc.document_type_id === id) {
         myDocs.push(doc);
       }
     })
     return(
-      console.log(myDocs)
+      myDocs
     )
   }
 
   render() {
     return(
       <div>
-      {this.renderDocTypes()}
-        {
-          this.props. documents.map(doc =>
-            <DocumentItem
-              myDocument={doc}
-              key={doc.id}
-          />
-        )
-      }
+        {this.renderDocTypes()}
       </div>
     )
   }
