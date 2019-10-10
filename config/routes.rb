@@ -5,11 +5,10 @@ Rails.application.routes.draw do
     resources :users do
       resources :cars
       resources :documents
+      resources :document_types
     end
     resources :documents do
       resources :document_pages
     end
-    resources :document_types
   end
-
 end

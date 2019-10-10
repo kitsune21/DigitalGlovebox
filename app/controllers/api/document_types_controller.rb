@@ -1,9 +1,12 @@
 class Api::DocumentTypesController < ApplicationController
+  before_action :set_user
+
   def index
-    render json: DocumentType.all
+    render json: @user.document_types.all
   end
+
   def create
-    @documentType = DocumentType.new(documentType_params)
+    @documentType = @user.document_types.new(documentType_params)
     if @documentType.save
       render json: @documentType
     else
@@ -12,7 +15,7 @@ class Api::DocumentTypesController < ApplicationController
   end
 
   def update
-    @documentType = DocumentType.find(params[:id])
+    @documentType = @user.document_types.find(params[:id])
     if @documentType.update(documentType_params)
       render json: @documentType
     else
@@ -21,13 +24,16 @@ class Api::DocumentTypesController < ApplicationController
   end
 
   def destroy
-    DocumentType.find(params[:id]).destroy
+    @user.document_types.find(params[:id]).destroy
     render json: { message: 'Document type deleted'}
   end
 
   private
+
+  def set_user
+    @user = User.find(params[:user_id])
+  end
     def documentType_params
-      # { documentType: {title: '', body: ''} }
     params.require(:document_type).permit(:name)
   end
 end
