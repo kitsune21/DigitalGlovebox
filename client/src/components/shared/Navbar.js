@@ -9,7 +9,7 @@ class Navbar extends React.Component{
       <div>
         <ul>
           <li><Link to='/'>Dashboard</Link></li>
-          <li>Documents</li>
+          <li><Link to='/documents'>Documents</Link></li>
           <li>Contact Us</li>
           {
             user ? <li>{user.email}<button onClick={ () => handleLogout(this.props.history) }>Logout</button></li> : <li><Link to='/login' >Login</Link></li>

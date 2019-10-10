@@ -23,6 +23,7 @@ class Documents extends Component {
 	render() {
 		return(
       <div>
+        <h2>My Documents</h2>
         <DocumentList documents={this.state.documents}/>
       </div>
     )
