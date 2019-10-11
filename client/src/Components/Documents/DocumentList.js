@@ -22,7 +22,11 @@ class DocumentList extends Component {
       this.state.document_types.map( type =>
         <div key={type.id} >
           <h2>{type.name}</h2>
-          {this.renderDocs(type.id).map( doc => <p key={doc.id}>{doc.name}</p>)}
+          {
+            this.renderDocs(type.id).map( doc =>
+            <DocumentItem key={doc.id} myDocument={doc} />
+          )
+        }
         </div>
       )
     )
