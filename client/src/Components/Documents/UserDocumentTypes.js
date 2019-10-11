@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { AuthConsumer } from '../../Providers/AuthProvider';
 import { withRouter, } from 'react-router-dom';
+import DocumentItem from './DocumentItem';
+
 
 
 class UserDocumentTypes extends Component {
