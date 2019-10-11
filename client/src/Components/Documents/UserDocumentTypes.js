@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
-import DocumentItem from './DocumentItem';
 import axios from 'axios';
+import { AuthConsumer } from '../../Providers/AuthProvider';
+import { withRouter, } from 'react-router-dom';
+import DocumentItem from './DocumentItem';
 
-class DocumentList extends Component {
 
-  state = {document_types: [], custom_doc_types: []}
 
-  componentDidMount() {
-    this.pullDocTypes();
-  }
+class UserDocumentTypes extends Component {
+  state = { document_types: []}
 
-  pullDocTypes = () => {
-    axios.get(`/api/users/1/document_types`)
+  componentDidMount(){
+    const { auth: { user } } = this.props
+
+    if (user)
+    {
+      axios.get(`/api/users/${user.id}/document_types`)
       .then( res => {
-        this.setState({document_types: res.data})
+      this.setState({document_types: res.data})
       })
+    }
   }
 
   renderDocTypes = () => {
@@ -33,6 +37,7 @@ class DocumentList extends Component {
   }
 
   renderDocs = (id) => {
+
     let myDocs = [];
     this.props.documents.forEach( doc => {
       if(doc.document_type_id === id) {
@@ -53,4 +58,16 @@ class DocumentList extends Component {
   }
 }
 
-export default DocumentList;
+export class ConnectedDocumentTypes extends Component {
+  render() {
+    return (
+      <AuthConsumer>
+        { auth =>
+          <UserDocumentTypes { ...this.props } auth={auth} />
+        }
+      </AuthConsumer>
+    )
+  }
+}
+
+export default withRouter(ConnectedDocumentTypes);
