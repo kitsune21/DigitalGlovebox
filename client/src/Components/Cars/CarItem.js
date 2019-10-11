@@ -1,26 +1,14 @@
 import React from 'react';
-import { Button, Icon } from 'semantic-ui-react';
 import CarForm from './CarForm';
 
-const CarItem = ({car, deleteCar}) => (
+const CarItem = ({car, deleteCar, updateCar, addItem}) => (
   <>
- <div>
-   <p>{car.make} {car.model} {car.year} </p>
- </div>
- <>
-  <button 
-    icon
-    color="red" 
-    size="tiny"
-    onClick={() => deleteCar(car.id)}
-    style={{ marginLeft: "15px", }}
-    >
-    <Icon name="trash" />
-   </button>
- </>
- </>
+  <div>
+    <p>{car.make} {car.model} {car.year} </p>
+    <button onClick={() => deleteCar(car.id)}>Delete</button>
+    <button onClick={() => updateCar(car.id)}>Edit</button>
+    
+  </div>
+</>
 )
-
-  
-
 export default CarItem;

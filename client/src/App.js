@@ -7,6 +7,7 @@ import Register from './Components/Auth/Register';
 import NoMatch from './Components/Shared/NoMatch';
 import ConnectedDocuments from './Components/Documents/Documents';
 import FetchUser from './Components/Auth/FetchUser';
+import { Form } from 'semantic-ui-react';
 
 
 const App = () => (
@@ -28,3 +29,4 @@ const App = () => (
 )
 
 export default App;
+
