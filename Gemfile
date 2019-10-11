@@ -9,11 +9,14 @@ gem 'puma', '~> 3.11'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 
+gem 'cloudinary'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry'
   gem 'pry-rails', '~> 0.3.9'
   gem 'faker'
+  gem 'dotenv-rails'
 end
 
 group :development do
