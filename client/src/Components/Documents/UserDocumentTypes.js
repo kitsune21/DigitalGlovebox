@@ -32,7 +32,6 @@ class UserDocumentTypes extends Component {
 
   renderDocs = (id) => {
 
-      console.log(this.props.documents)
     let myDocs = [];
     this.props.documents.forEach( doc => {
       if(doc.document_type_id === id) {
