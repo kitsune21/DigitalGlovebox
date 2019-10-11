@@ -19,16 +19,38 @@ class UserDocumentTypes extends Component {
     }
   }
 
-	render() {
-    const { document_types } = this.state
-		return(
-      document_types.map( type =>
+  renderDocTypes = () => {
+    return(
+      this.state.document_types.map( type =>
         <div key={type.id} >
-          <p>{type.name}</p>
+          <h2>{type.name}</h2>
+          {this.renderDocs(type.id).map( doc => <p key={doc.id}>{doc.name}</p>)}
         </div>
       )
     )
-	}
+  }
+
+  renderDocs = (id) => {
+
+      console.log(this.props.documents)
+    let myDocs = [];
+    this.props.documents.forEach( doc => {
+      if(doc.document_type_id === id) {
+        myDocs.push(doc);
+      }
+    })
+    return(
+      myDocs
+    )
+  }
+
+  render() {
+    return(
+      <div>
+        {this.renderDocTypes()}
+      </div>
+    )
+  }
 }
 
 export class ConnectedDocumentTypes extends Component {

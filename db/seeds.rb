@@ -54,10 +54,11 @@ def generate_standard_users
       user_id: user.id
     )
     3.times do
-      document_type = DocumentType.create(
-      name: @type.sample,
-      user_id: user.id
-    )
+      document = Document.create(
+        name: Faker::Superhero.name,
+        user_id: user.id,
+        document_type_id: @type_ids.sample
+      )
     end
 
     3.times do
@@ -69,7 +70,7 @@ def generate_standard_users
         document = Document.create(
           name: Faker::Superhero.name,
           user_id: user.id,
-          document_type_id: @type_ids.sample
+          document_type_id: document_type.id
         )
       end
     end
