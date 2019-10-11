@@ -23,8 +23,9 @@ class Documents extends Component {
 	render() {
 		return(
       <div>
-        <h2>My Documents</h2>
-        <DocumentList document_types={this.state.document_types} documents={this.state.documents}/>
+        <h1>My Documents</h1>
+        <DocumentList user_id={this.props.user.id} document_types={this.state.document_types} documents={this.state.documents}/>
+        <h3>Custom Document Types</h3>
       </div>
     )
 	}

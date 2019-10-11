@@ -4,14 +4,17 @@ import axios from 'axios';
 
 class DocumentList extends Component {
 
-  state = {document_types: []}
+  state = {document_types: [], custom_doc_types: []}
 
   componentDidMount() {
-    axios.get(`/api/users/1/document_types`)
-    .then( res => {
-    this.setState({document_types: res.data})
-  })
+    this.pullDocTypes();
+  }
 
+  pullDocTypes = () => {
+    axios.get(`/api/users/1/document_types`)
+      .then( res => {
+        this.setState({document_types: res.data})
+      })
   }
 
   renderDocTypes = () => {

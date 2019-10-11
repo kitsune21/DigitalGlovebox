@@ -1,5 +1,5 @@
-name = %w[Manual License other]
-type = ['Insurance', 'Registration', 'Service Record']
+name = %w[Medical License Random Other]
+type = ['Insurance', 'Registration', 'Service Record', 'Manual']
 default = User.create(
   email: 'user@email.com',
   name: 'Will',
@@ -17,7 +17,7 @@ default_car = Car.create(
     user_id: default.id
   )
 @type_ids = []
-for i in (0..2) do
+for i in (0..3) do
   dt = DocumentType.create(
     name: type[i],
     user_id: 1
