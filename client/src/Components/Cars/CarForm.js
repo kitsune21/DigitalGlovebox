@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-//import { Form } from 'semantic-ui-react';
+import { Form, Button } from 'semantic-ui-react';
 
 class CarForm extends Component {
- state = { name: '' }
+ state = { year: "", make: "", model: "", mileage: "" }
  componentDidMount() {
    if (this.props.id) {
      this.setState({ name: this.props.name })
@@ -16,6 +16,7 @@ class CarForm extends Component {
 
  handleSubmit = (e) => {
    e.preventDefault();
+   
    if (this.props.id) {
      this.props.update(this.props.id, this.state)
      this.props.toggleEdit()
@@ -26,10 +27,50 @@ class CarForm extends Component {
  }
 
  render() {
-   const { name } = this.state
-      return(
-        <p>hi</p>
-      )
+   const { year, make, model, mileage } = this.state
+   return (
+     <Form onSubmit={this.handleSubmit}>
+
+       <Form.Input
+         required
+         type='number'
+         placeholder='Year'
+         label='year'
+         name='year'
+         value={year}
+         onChange={this.handleChange}
+        />
+
+         <Form.Input
+           required
+         placeholder='Make'
+         label='make'
+         name='make'
+         value={make}
+         onChange={this.handleChange}
+         />
+
+         <Form.Input
+           required
+         placeholder='Model'
+         label='model'
+         name='model'
+         value={model}
+         onChange={this.handleChange}
+         />
+
+         <Form.Input
+           required
+           type='number'
+         placeholder='Mileage'
+         label='mileage'
+         name='mileage'
+         value={mileage}
+         onChange={this.handleChange}
+         />
+         <Button type='submit'>Submit</Button>
+      </Form>
+    )
    }
   }
 

@@ -3,9 +3,10 @@ import { withRouter, } from 'react-router-dom';
 import axios from 'axios';
 import { AuthConsumer } from '../../Providers/AuthProvider';
 import CarList from '../Cars/CarList';
+import CarForm from '../Cars/CarForm';
 
 class Dashboard extends Component {
-  state = { cars: []};
+  state = { cars: [], adding: false};
 
   componentDidMount() {
     const { auth: { user } } = this.props;
@@ -20,8 +21,13 @@ class Dashboard extends Component {
     }
   }
 
-  addItem = (name) => {
-    axios.post('/api/cars', { name })
+  toggleAdding = () => {
+    this.setState({adding: !this.state.adding})
+  }
+
+  addItem = (car) => {
+    const { auth: { user } } = this.props;
+    axios.post(`/api/users/${user.id}/cars`, { car })
       .then( res => {
         const { cars } = this.state;
         this.setState({ cars: [...cars, res.data] });
@@ -50,8 +56,14 @@ class Dashboard extends Component {
 
   render() {
     return (
-      <CarList cars={this.state.cars} />
-       );
+      <div>
+        <button onClick={() => this.toggleAdding()}>Add</button>
+        <CarList cars={this.state.cars} />
+        {
+          this.state.adding ? <CarForm add={this.addItem}/> : null
+        }
+      </div>
+      );
      }
   }
 
