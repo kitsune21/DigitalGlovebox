@@ -4,7 +4,7 @@ import { AuthConsumer } from '../../Providers/AuthProvider';
 import { withRouter, } from 'react-router-dom';
 import DocumentItem from './DocumentItem';
 import DocTypeForm from './DocTypeForm';
-import { Button, Icon } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 
 class UserDocumentTypes extends Component {
 
