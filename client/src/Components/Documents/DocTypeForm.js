@@ -17,6 +17,7 @@ class DocTypeForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    console.log(this.props)
     if (this.props.id) {
       this.props.update(this.props.id, this.state)
       this.props.toggleEdit()
