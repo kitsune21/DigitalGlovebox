@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import { withRouter, } from 'react-router-dom'; 
-import axios from 'axios';
-import { AuthConsumer } from '../../Providers/AuthProvider';
 import CarItem from './CarItem';
 
  class CarList extends Component {
@@ -10,7 +7,7 @@ import CarItem from './CarItem';
       return (
           <div>
            { this.props.cars.map( car => 
-             <CarItem car={car} deleteCar={this.props.deleteCar} updateCar={this.props.updateCar}/>
+             <CarItem key={car.id} car={car} deleteCar={this.props.deleteCar} updateCar={this.props.updateCar}/>
              )
            }
          </div>

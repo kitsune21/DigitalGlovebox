@@ -62,7 +62,7 @@ class Dashboard extends Component {
         <button onClick={() => this.toggleAdding()}>Add</button>
         <CarList cars={this.state.cars} deleteCar={this.deleteCar} updateCar={this.updateCar}/>
         {
-          this.state.adding ? <CarForm add={this.addItem}/> : null
+          this.state.adding ? <CarForm add={this.addItem} toggleAdd={this.toggleAdding}/> : null
         }
       </div>
       );
