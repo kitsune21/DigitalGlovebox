@@ -29,13 +29,13 @@ def destroy
 end
 
 
-  private
+private
 
   def set_user
     @user = User.find(params[:user_id])
   end
 
   def document_params
-    params.require(:document).permit(:name)
+    params.require(:document).permit(:name, :document_type_id)
   end
 end

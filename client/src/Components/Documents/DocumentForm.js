@@ -3,29 +3,33 @@ import { Form, Button } from 'semantic-ui-react';
 import axios from 'axios';
 
 class DocumentForm extends Component {
- state = { name: '', doc_type_id: '' }
+ state = { name: '', doc_type_id: '', document_types: [], user_document_types: [] }
 
  componentDidMount() {
    if (this.props.id) {
      this.setState({ name: this.props.name, doc_type_id: this.props.doc_type_id })
    }
+   this.pullDocTypes();
  }
 
  pullDocTypes = () => {
-  const { auth: { user } } = this.props
   axios.get(`/api/users/1/document_types`)
     .then( res => {
       this.setState({document_types: res.data})
     })
-  axios.get(`/api/users/${user.id}/document_types`)
+  axios.get(`/api/users/${this.props.user_id}/document_types`)
     .then( res => {
-    this.setState({document_types: [...this.state.document_types, res.data]})
+      this.setState({user_document_types: res.data})
     })
  }
 
  handleChange = (e) => {
    const { name, value } = e.target
    this.setState({ [name]: value })
+ }
+
+ handleSelection = (e, data) => {
+   this.setState({doc_type_id: data.value})
  }
 
  handleSubmit = (e) => {
@@ -38,6 +42,15 @@ class DocumentForm extends Component {
      this.props.add(this.state)
    }
    this.setState({ name: '' })
+ }
+
+ setDocTypes = () => {
+   let myTypes = [];
+   const doc_types = this.state.document_types.concat(this.state.user_document_types);
+   doc_types.forEach( type => {
+     myTypes.push({key: type.id , text: type.name, value: type.id})
+   })
+   return myTypes;
  }
 
  render() {
@@ -56,11 +69,11 @@ class DocumentForm extends Component {
 
          <Form.Select
           required
-          label='doc_type_id'
-          name='doc_type_id'
-          value={doc_type_id}
-          options={this.state.options}
-          onChange={this.handleChange}
+          fluid
+          label='Docoument Type'
+          placeholder='Document Type'
+          options={this.setDocTypes()}
+          onChange={this.handleSelection}
          />
          <Button type='submit'>Submit</Button>
       </Form>

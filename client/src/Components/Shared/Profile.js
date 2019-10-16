@@ -51,7 +51,7 @@ class Profile extends Component {
     return (
       <>
         <div>
-          <img width='25%' src={user.image || defaultImage} />
+          <img width='25%' alt='Pretty' src={user.image || defaultImage} />
         </div>
         <div>
           <h2>{user.name}</h2>
