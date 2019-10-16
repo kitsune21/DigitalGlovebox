@@ -9,7 +9,6 @@ import NoMatch from './Components/Shared/NoMatch';
 import ConnectedDocuments from './Components/Documents/Documents';
 import FetchUser from './Components/Auth/FetchUser';
 
-
 const App = () => (
   <>
     <div>
