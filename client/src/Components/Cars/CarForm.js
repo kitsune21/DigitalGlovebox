@@ -5,7 +5,7 @@ class CarForm extends Component {
  state = { year: "", make: "", model: "", mileage: "" }
  componentDidMount() {
    if (this.props.id) {
-     this.setState({ name: this.props.name })
+     this.setState({ year: this.props.car.year, make: this.props.car.make, model: this.props.car.model, mileage: this.props.car.mileage })
    }
  }
 
@@ -18,8 +18,9 @@ class CarForm extends Component {
    e.preventDefault();
    
    if (this.props.id) {
-     this.props.update(this.props.id, this.state)
-     this.props.toggleEdit()
+     this.props.updateCar(this.props.id, this.state)
+     this.props.toggleEditing()
+     this.props.toggleLoading()
    } else {
      this.props.add(this.state)
    }
