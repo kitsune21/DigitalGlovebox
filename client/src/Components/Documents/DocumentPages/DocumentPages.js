@@ -28,8 +28,8 @@ class DocumentPages extends Component {
   }
 
   previousPage = () => {
-    const {pages, currentPage } = this.state;
-    if(currentPage > 1) {
+    const { currentPage } = this.state;
+    if(currentPage >= 1) {
       this.setState({currentPage: this.state.currentPage - 1})
     }
   }
