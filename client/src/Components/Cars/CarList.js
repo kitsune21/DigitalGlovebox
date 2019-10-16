@@ -10,7 +10,7 @@ import CarItem from './CarItem';
       return (
           <div>
            { this.props.cars.map( car => 
-             <CarItem car={car}/>
+             <CarItem car={car} deleteCar={this.props.deleteCar} updateCar={this.props.updateCar}/>
              )
            }
          </div>
