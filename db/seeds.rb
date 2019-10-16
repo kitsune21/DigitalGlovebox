@@ -33,6 +33,10 @@ def generate_default_user_info
       user_id: default.id,
       document_type_id: @type_ids.sample
     )
+    document_page = DocumentPage.create(
+      document_id: document.id,
+      front_img: 'https://bit.ly/2ITE72u'
+    )
   end
 end
 
@@ -59,6 +63,10 @@ def generate_standard_users
         user_id: user.id,
         document_type_id: @type_ids.sample
       )
+      document_page = DocumentPage.create(
+        document_id: document.id,
+        front_img: 'https://bit.ly/2ITE72u'
+      )
     end
 
     3.times do
@@ -71,6 +79,10 @@ def generate_standard_users
           name: Faker::Superhero.name,
           user_id: user.id,
           document_type_id: document_type.id
+        )
+        document_page = DocumentPage.create(
+          document_id: document.id,
+          front_img: 'https://bit.ly/2ITE72u'
         )
       end
     end
