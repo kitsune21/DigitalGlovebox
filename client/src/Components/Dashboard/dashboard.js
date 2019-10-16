@@ -35,6 +35,7 @@ class Dashboard extends Component {
    }
 
    updateCar = (id) => {
+    const { auth: { user } } = this.props;
     axios.put(`/api/cars/${id}`)
       .then( res => {
         const cars = this.state.cars.map( c => {
@@ -47,7 +48,8 @@ class Dashboard extends Component {
    }
 
    deleteCar = (id) => {
-    axios.delete(`/api/cars/${id}`)
+    const { auth: { user } } = this.props;
+    axios.delete(`/api/users/${user.id}/cars/${id}`)
       .then( res => {
         const { cars } = this.state;
         this.setState({ cars: cars.filter(c => c.id !== id) })
@@ -58,7 +60,7 @@ class Dashboard extends Component {
     return (
       <div>
         <button onClick={() => this.toggleAdding()}>Add</button>
-        <CarList cars={this.state.cars} />
+        <CarList cars={this.state.cars} deleteCar={this.deleteCar} updateCar={this.updateCar}/>
         {
           this.state.adding ? <CarForm add={this.addItem}/> : null
         }
