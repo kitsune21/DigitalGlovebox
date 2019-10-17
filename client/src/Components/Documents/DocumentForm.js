@@ -3,7 +3,7 @@ import { Form, Button } from 'semantic-ui-react';
 import axios from 'axios';
 
 class DocumentForm extends Component {
- state = { name: '', doc_type_id: '', document_types: [], user_document_types: [] }
+ state = { name: '', doc_type_id: '', document_types: [], user_document_types: [], doc_pages: [] }
 
  componentDidMount() {
    if (this.props.id) {
