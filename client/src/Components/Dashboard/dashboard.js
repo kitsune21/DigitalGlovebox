@@ -6,7 +6,7 @@ import CarList from '../Cars/CarList';
 import CarForm from '../Cars/CarForm';
 
 class Dashboard extends Component {
-  state = { cars: [], adding: false};
+  state = { cars: [], adding: false, editing: false};
 
   componentDidMount() {
     const { auth: { user } } = this.props;
@@ -25,6 +25,10 @@ class Dashboard extends Component {
     this.setState({adding: !this.state.adding})
   }
 
+  toggleEditing = () => {
+    this.setState({editing: !this.state.editing})
+  }
+
   addItem = (car) => {
     const { auth: { user } } = this.props;
     axios.post(`/api/users/${user.id}/cars`, { car })
@@ -34,16 +38,16 @@ class Dashboard extends Component {
       })
    }
 
-   updateCar = (id) => {
+   updateCar = (id, car) => {
     const { auth: { user } } = this.props;
-    axios.put(`/api/cars/${id}`)
+    axios.put(`/api/users/${user.id}/cars/${id}`, {car})
       .then( res => {
-        const cars = this.state.cars.map( c => {
-        if (c.id === id)
-          return res.data;
-        return c;
-      });
-      this.setState({ cars });
+        const { cars } = this.state.cars.map( c => {
+          if (c.id === id)
+            return res.data;
+          return c;
+        });
+        this.setState({ cars });
     })
    }
 
@@ -60,10 +64,11 @@ class Dashboard extends Component {
     return (
       <div>
         <button onClick={() => this.toggleAdding()}>Add</button>
-        <CarList cars={this.state.cars} deleteCar={this.deleteCar} updateCar={this.updateCar}/>
+        <CarList cars={this.state.cars} deleteCar={this.deleteCar} updateCar={this.updateCar} toggleEditing={this.toggleEditing} editing={this.state.editing}/>
         {
           this.state.adding ? <CarForm add={this.addItem} toggleAdd={this.toggleAdding}/> : null
         }
+    
       </div>
       );
      }
