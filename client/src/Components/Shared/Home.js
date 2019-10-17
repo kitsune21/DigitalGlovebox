@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ConnectedDashboard from '../Dashboard/dashboard';
-import ConnectedDocuments from '../Documents/Documents';
 class Home extends Component {
 
   componentDidMount() {

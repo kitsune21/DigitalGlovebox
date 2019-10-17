@@ -53,30 +53,38 @@ class DocumentForm extends Component {
    return myTypes;
  }
 
+ renderForm = (name) => {
+   return(
+    <Form onSubmit={this.handleSubmit}>
+      <h3>Add Document</h3>
+    <Form.Input
+      required
+      placeholder='Name'
+      label='name'
+      name='name'
+      value={name}
+      onChange={this.handleChange}
+    />
+
+      <Form.Select
+      required
+      fluid
+      label='Docoument Type'
+      placeholder='Document Type'
+      options={this.setDocTypes()}
+      onChange={this.handleSelection}
+      />
+      <Button type='submit'>Submit</Button>
+    </Form>
+   )
+ }
+
  render() {
-   const { name, doc_type_id } = this.state;
+   const { name } = this.state;
    return (
-     <Form onSubmit={this.handleSubmit}>
-
-       <Form.Input
-         required
-         placeholder='Name'
-         label='name'
-         name='name'
-         value={name}
-         onChange={this.handleChange}
-        />
-
-         <Form.Select
-          required
-          fluid
-          label='Docoument Type'
-          placeholder='Document Type'
-          options={this.setDocTypes()}
-          onChange={this.handleSelection}
-         />
-         <Button type='submit'>Submit</Button>
-      </Form>
+     <div>
+        {this.renderForm(name)}
+     </div>
     )
    }
   }

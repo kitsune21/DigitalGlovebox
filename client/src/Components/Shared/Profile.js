@@ -62,8 +62,7 @@ class Profile extends Component {
   }
   
   editView = () => {
-    const { auth: { user }, } = this.props;
-    const { formValues: { name, email, file, } } = this.state;
+    const { formValues: { name, email, } } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
         <div>
