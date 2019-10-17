@@ -24,7 +24,7 @@ class DocumentList extends Component {
           <h2>{type.name}</h2>
           {
             this.renderDocs(type.id).map( doc =>
-            <DocumentItem key={doc.id} myDocument={doc} deleteDocument={this.props.deleteDocument} />
+            <DocumentItem key={doc.id} myDocument={doc} deleteDocument={this.props.deleteDocument} updateDocument={this.props.updateDocument} />
           )
         }
         </div>
