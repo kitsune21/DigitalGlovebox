@@ -7,6 +7,7 @@ import ConnectedDocumentTypes from './UserDocumentTypes';
 import DocumentForm from './DocumentForm';
 
 
+
 class Documents extends Component {
   state = {documents: [], document_types: []}
 
@@ -36,6 +37,14 @@ class Documents extends Component {
       })
   }
 
+  deleteDocument = (id, doc) => {
+    axios.delete(`/api/users/${this.state.user_id}/documents/${id}`, doc)
+      .then( res => {
+        const { documents } = this.state;
+        this.setState({ documents: documents.filter(d => d.id !== id) })
+      })
+   }
+
 	render() {
     const { auth: { user } } = this.props;
 		return(
@@ -43,7 +52,7 @@ class Documents extends Component {
         <h3>Add Document</h3>
         <DocumentForm user_id={user.id} add={this.addDocument}/>
         <h1>My Documents</h1>
-        <DocumentList document_types={this.state.document_types} documents={this.state.documents}/>
+        <DocumentList document_types={this.state.document_types} documents={this.state.documents} deleteDocument={this.deleteDocument}/>
         <h3>Custom Document Types</h3>
         <ConnectedDocumentTypes documents={this.state.documents}/>
       </div>
