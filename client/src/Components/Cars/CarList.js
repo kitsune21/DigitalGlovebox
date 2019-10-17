@@ -24,7 +24,6 @@ import CarItem from './CarItem';
           )
       }
     }
-
   }
 
   export default CarList;
