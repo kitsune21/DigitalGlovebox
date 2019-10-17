@@ -16,7 +16,7 @@ class DocumentPages extends Component {
   renderPage = () => {
     const {pages, currentPage } = this.state;
     return(
-      pages.length > 0 ? <DocumentPageItem page={pages[currentPage]}/> : null
+      pages.length > 0 ? <DocumentPageItem page={pages[currentPage]} deletePage={this.deletePage}/> : null
     )
   }
 
@@ -32,6 +32,14 @@ class DocumentPages extends Component {
     if(currentPage >= 1) {
       this.setState({currentPage: this.state.currentPage - 1})
     }
+  }
+
+  deletePage = (id) => {
+    axios.delete(`api/documents/${this.props.doc_id}/document_pages/${id}`)
+      .then( res => {
+        const {pages} = this.state;
+        this.setState({ pages: pages.filter( p => p.id !== id)})
+      })
   }
 
   render() {

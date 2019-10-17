@@ -25,7 +25,7 @@ end
     end
 
     def destroy
-      @documents.document_page.fiind(params[:id]).destroy
+      @documents.document_pages.find(params[:id]).destroy
       render json: { message: 'Document Page deleted'}
     end
 

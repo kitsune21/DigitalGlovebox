@@ -42,12 +42,15 @@ class Dashboard extends Component {
     const { auth: { user } } = this.props;
     axios.put(`/api/users/${user.id}/cars/${id}`, {car})
       .then( res => {
-        const { cars } = this.state.cars.map( c => {
+        const cars = this.state.cars.map( c => {
           if (c.id === id)
             return res.data;
           return c;
         });
         this.setState({ cars });
+    })
+    .catch(res => {
+      console.log(res)
     })
    }
 
