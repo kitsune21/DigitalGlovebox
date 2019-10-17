@@ -4,7 +4,7 @@ import { AuthConsumer } from '../../Providers/AuthProvider';
 import { withRouter, } from 'react-router-dom';
 import DocumentItem from './DocumentItem';
 import DocTypeForm from './DocTypeForm';
-import { Button, Icon } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 
 class UserDocumentTypes extends Component {
 
@@ -63,9 +63,18 @@ class UserDocumentTypes extends Component {
   }
 
   renderDocTypes = () => {
+    const { editing } = this.state
     return(
       this.state.document_types.map( type =>
         <div key={type.id} >
+        {
+          editing ?
+          <DocTypeForm
+          update={this.updateDocType}
+          toggleEdit={this.toggleEdit}
+          id={type.id}
+          /> :
+          <>
           <h2>{type.name}</h2>
           <Button onClick={this.toggleEdit}>
             Edit
@@ -73,6 +82,8 @@ class UserDocumentTypes extends Component {
           <Button onClick={ () => this.deleteDocType(type.id) }>
             Delete
           </Button>
+          </>
+        }
           {
             this.renderDocs(type.id).map( doc =>
             <DocumentItem key={doc.id} myDocument={doc} />

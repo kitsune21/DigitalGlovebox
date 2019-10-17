@@ -4,7 +4,7 @@ import { AuthConsumer } from '../../Providers/AuthProvider';
 
 class Navbar extends React.Component{
   render() {
-    const { auth: { user, handleLogout, }, location, } = this.props;
+    const { auth: { user, handleLogout, }, } = this.props;
     return (
       <div>
         <ul>

@@ -1,5 +1,6 @@
 @name = %w[Medical License Random Other]
 @type = ['Insurance', 'Registration', 'Service Record', 'Manual']
+@doc_pages = ['https://bit.ly/2MkWYpj', 'https://bit.ly/33GZ5Kd', 'https://bit.ly/2ITE72u']
 
 def generate_default_user_info
   default = User.create(
@@ -33,11 +34,15 @@ def generate_default_user_info
       user_id: default.id,
       document_type_id: @type_ids.sample
     )
+    document_page = DocumentPage.create(
+      document_id: document.id,
+      front_img: @doc_pages.sample
+    )
   end
 end
 
 def generate_standard_users
-  30.times do
+  5.times do
     user = User.create(
       email: Faker::Internet.email,
       name: Faker::Name.first_name,
@@ -59,6 +64,12 @@ def generate_standard_users
         user_id: user.id,
         document_type_id: @type_ids.sample
       )
+      3.times do
+        document_page = DocumentPage.create(
+          document_id: document.id,
+          front_img: @doc_pages.sample
+        )
+      end
     end
 
     3.times do
@@ -71,6 +82,10 @@ def generate_standard_users
           name: Faker::Superhero.name,
           user_id: user.id,
           document_type_id: document_type.id
+        )
+        document_page = DocumentPage.create(
+          document_id: document.id,
+          front_img: @doc_pages.sample
         )
       end
     end

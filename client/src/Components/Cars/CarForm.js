@@ -23,6 +23,7 @@ class CarForm extends Component {
      this.props.toggleLoading()
    } else {
      this.props.add(this.state)
+     this.props.toggleAdd()
    }
    this.setState({ name: '' })
  }
