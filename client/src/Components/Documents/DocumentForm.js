@@ -12,6 +12,7 @@ class DocumentForm extends Component {
    this.pullDocTypes();
  }
 
+
  pullDocTypes = () => {
   axios.get(`/api/users/1/document_types`)
     .then( res => {

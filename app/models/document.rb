@@ -1,5 +1,5 @@
 class Document < ApplicationRecord
   belongs_to :user
-  has_one :document_type
-  has_many :document_pages
+  belongs_to :document_type
+  has_many :document_pages, dependent: :destroy
 end
