@@ -8,9 +8,17 @@ import Profile from './Components/Shared/Profile';
 import NoMatch from './Components/Shared/NoMatch';
 import ConnectedDocuments from './Components/Documents/Documents';
 import FetchUser from './Components/Auth/FetchUser';
+import styled from 'styled-components';
+
+const AppContainer = styled.div`
+  background: #000000;
+  color: #ffffff;
+  font: 
+  `
 
 const App = () => (
   <>
+  <AppContainer>
     <div>
       <FetchUser>
         <Navbar />
@@ -25,6 +33,7 @@ const App = () => (
         </Switch>
       </FetchUser>
     </div>
+    </AppContainer>
   </>
 )
 

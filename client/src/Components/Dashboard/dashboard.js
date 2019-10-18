@@ -4,6 +4,10 @@ import axios from 'axios';
 import { AuthConsumer } from '../../Providers/AuthProvider';
 import CarList from '../Cars/CarList';
 import CarForm from '../Cars/CarForm';
+import styled from 'styled-components';
+
+const Button = styled.button`
+   color: #2E8536;`
 
 class Dashboard extends Component {
   state = { cars: [], adding: false, editing: false};
@@ -63,10 +67,11 @@ class Dashboard extends Component {
       })
    }
 
+
   render() {
     return (
       <div>
-        <button onClick={() => this.toggleAdding()}>Add</button>
+        <Button onClick={() => this.toggleAdding()}>Add</Button>
         <CarList cars={this.state.cars} deleteCar={this.deleteCar} updateCar={this.updateCar} toggleEditing={this.toggleEditing} editing={this.state.editing}/>
         {
           this.state.adding ? <CarForm add={this.addItem} toggleAdd={this.toggleAdding}/> : null
