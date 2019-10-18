@@ -17,14 +17,37 @@ export class DocumentPagesForm extends Component {
   }
 
   handleSubmit = () => {
-    this.addPage(this.state)
-    this.props.setAddPages()
+    if(!this.props.id){
+      this.addPage(this.state)
+      this.props.setAddPages()
+    } else {
+      console.log('oh hi')
+      this.updatePage(this.state)
+    }
+    
   }
 
-  addPage = (document_page) => {
-    const { auth: { user } } = this.props
+  addPage = (doc) => {
     const { document_id } = this.props;
-    axios.post(`/api/users/${user.id}/documents/${document_id}/document_pages`, {document_page})
+    let file = new FormData();
+    file.append("file", doc.front_img)
+    axios.post(`/api/documents/${document_id}/document_pages`, file)
+      .then( res => {
+        const { pages } = this.state;
+        this.setState({ pages: [...pages, res.data]})
+      })
+      .catch( res => {
+        console.log(res)
+      })
+  }
+
+  updatePage = (doc) => {
+    const { document_id } = this.props;
+    console.log(doc)
+    let file = new FormData();
+    file.append("file", doc.front_img)
+    console.log(file.get("file"))
+    axios.put(`/api/documents/${document_id}/document_pages/${this.props.id}`, file)
       .then( res => {
         const { pages } = this.state;
         this.setState({ pages: [...pages, res.data]})

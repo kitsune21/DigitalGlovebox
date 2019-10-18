@@ -8,6 +8,7 @@ class Profile extends Component {
   state = { editing: false, formValues: { name: '', email: '', file: '', }, };
 
   onDrop = (files) => {
+    console.log(files)
     this.setState({ formValues: { ...this.state.formValues, file: files[0], } });
   }
   
