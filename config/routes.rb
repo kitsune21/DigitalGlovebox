@@ -5,10 +5,10 @@ Rails.application.routes.draw do
     resources :users, only: :update do
       resources :cars
       resources :documents 
-      resources :documents do
-        resources :document_pages
-      end
       resources :document_types
+    end
+    resources :documents do
+      resources :document_pages
     end
   end
 end
