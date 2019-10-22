@@ -48,7 +48,7 @@ class Documents extends Component {
       <ConnectedDocPagesFrom document_id={this.state.addPagesDocID} setAddPages={this.setAddPages}/>
     )
   }
-
+  
   deleteDocument = (id, doc) => {
     axios.delete(`/api/users/${this.state.user_id}/documents/${id}`, doc)
       .then( res => {

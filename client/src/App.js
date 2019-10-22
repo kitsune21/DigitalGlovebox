@@ -11,8 +11,11 @@ import FetchUser from './Components/Auth/FetchUser';
 import { ConnectedDashboard } from './Components/Dashboard/dashboard';
 import ProtectedRoute from './Components/Auth/ProtectedRoute';
 
+import styled from 'styled-components';
+
 const App = () => (
   <>
+  <AppContainer>
     <div>
       <FetchUser>
         <Navbar />
@@ -28,6 +31,7 @@ const App = () => (
         </Switch>
       </FetchUser>
     </div>
+    </AppContainer>
   </>
 )
 
