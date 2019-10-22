@@ -14,7 +14,11 @@ const Container = styled.div`
   padding: 10px;
   color: black;
   margin: auto;
-  overflow: hidden;
+  overflow: scroll;
+  height: auto;
+  min-height: 1500px;
+  max-height: 100%;
+  width: 85%;
 `
 
 const One = styled.div`
