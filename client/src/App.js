@@ -16,6 +16,7 @@ const AppContainer = styled.div`
   background: #000000;
   color: #ffffff;
   height: 100%;
+`
 
 const App = () => (
   <>
@@ -34,6 +35,7 @@ const App = () => (
         </Switch>
       </FetchUser>
     </div>
+
     </AppContainer>
   </>
 )
