@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import DocumentPageItem from './DocumentPageItem';
+import { Button } from 'semantic-ui-react';
 
 class DocumentPages extends Component {
 
@@ -24,6 +25,8 @@ class DocumentPages extends Component {
     const {pages, currentPage } = this.state;
     if(currentPage < pages.length -1) {
       this.setState({currentPage: this.state.currentPage + 1})
+    } else {
+      this.setState({currentPage: 0})
     }
   }
 
@@ -31,6 +34,8 @@ class DocumentPages extends Component {
     const { currentPage } = this.state;
     if(currentPage >= 1) {
       this.setState({currentPage: this.state.currentPage - 1})
+    } else {
+      this.setState({currentPage: this.state.pages.length - 1})
     }
   }
 
@@ -47,8 +52,8 @@ class DocumentPages extends Component {
       <div>
         <h4>Pages</h4>
         {this.renderPage()}
-        <button onClick={() => this.previousPage()}>Previous Page</button>
-        <button onClick={() => this.nextPage()}>Next Page</button>
+        <Button onClick={() => this.previousPage()}>Previous Page</Button>
+        <Button onClick={() => this.nextPage()}>Next Page</Button>
       </div>
     )
   }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { AuthConsumer, } from '../../../Providers/AuthProvider'
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
+import { Form, Button } from 'semantic-ui-react';
 
 export class DocumentPagesForm extends Component {
 
@@ -69,7 +70,7 @@ export class DocumentPagesForm extends Component {
 
   render() {
     return(
-      <form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit}>
         <h3>Add Document Pages</h3>
         <div>
           <Dropzone
@@ -93,9 +94,9 @@ export class DocumentPagesForm extends Component {
             }}
           </Dropzone>
           {this.state.files ? this.renderFileName() : null}
-          <button>Add</button>
+          <Button type='submit'>Add</Button>
         </div>
-      </form>
+      </Form>
     )
   }
 }

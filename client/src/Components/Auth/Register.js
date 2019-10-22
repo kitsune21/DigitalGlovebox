@@ -1,5 +1,6 @@
 import React from 'react';
-import { AuthConsumer, } from "../../Providers/AuthProvider";
+import { AuthConsumer, } from '../../Providers/AuthProvider';
+import { Button, Form, Segment, Header, } from 'semantic-ui-react';
 
 class Register extends React.Component {
   state = { email: '', password: '', passwordConfirmation: '', };
@@ -10,7 +11,7 @@ class Register extends React.Component {
     const { auth: { handleRegister, }, history, } = this.props;
 
     if (password === passwordConfirmation)
-      handleRegister({ email, password, }, history);
+      handleRegister({ email, password, passwordConfirmation, }, history);
     else
       alert('Passwords Do Not Match!')
   }
@@ -24,10 +25,10 @@ class Register extends React.Component {
     const { email, password, passwordConfirmation, } = this.state;
     
     return (
-      <div>
-        <h1>Register</h1>
-        <form onSubmit={this.handleSubmit}>
-          <input
+      <Segment basic>
+        <Header as='h1' textAlign='center'>Register</Header>
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Input
             label="Email"
             required
             autoFocus
@@ -36,7 +37,7 @@ class Register extends React.Component {
             placeholder='Email'
             onChange={this.handleChange}
           />
-          <input
+          <Form.Input
             label="Password"
             required
             name='password'
@@ -45,7 +46,7 @@ class Register extends React.Component {
             type='password'
             onChange={this.handleChange}
           />
-          <input
+          <Form.Input
             label="Password Confirmation"
             required
             name='passwordConfirmation'
@@ -54,11 +55,11 @@ class Register extends React.Component {
             type='password'
             onChange={this.handleChange}
           />
-          <div>
-            <button type="submit">Submit</button>
-          </div>
-        </form>
-      </div>
+          <Segment textAlign='center' basic>
+            <Button primary type='submit'>Submit</Button>
+          </Segment>
+        </Form>
+      </Segment>
     )
   }
 }

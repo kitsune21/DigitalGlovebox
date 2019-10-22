@@ -2,15 +2,8 @@ import React from 'react';
 import { Link, withRouter, } from 'react-router-dom';
 import { AuthConsumer } from '../../Providers/AuthProvider';
 import { Menu } from 'semantic-ui-react';
-import styled from 'styled-components';
 
 class Navbar extends React.Component {
-
-  renderLoginRegisterLink = () => {
-    return(
-      <li><Link to='/login' >Login</Link>/<Link to='/register'>Register</Link></li>
-    )
-  }
 
   rightNavItems = () => {
     const { auth: { user, handleLogout, }, location, } = this.props;
@@ -50,7 +43,7 @@ class Navbar extends React.Component {
     return (
       <div>
         <Menu pointing secondary inverted>
-          <Link to='/'>
+          <Link to='/dashboard'>
             <Menu.Item
               name='dashboard'
               id='dashboard'
@@ -64,14 +57,7 @@ class Navbar extends React.Component {
               active={this.props.location.pathname === '/documents'}
             />
           </Link>
-          <Link to='#'>
-            <Menu.Item
-              name='contact us'
-              id='contact us'
-              active={this.props.location.pathname === '/#'}
-            />
-          </Link>
-            { this.rightNavItems() }
+          { this.rightNavItems() }
         </Menu>
       </div>
     )
