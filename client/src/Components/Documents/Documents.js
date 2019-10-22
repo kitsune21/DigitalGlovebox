@@ -58,7 +58,6 @@ class Documents extends Component {
    }
 
    updateDocument = (id, doc) => {
-     console.log(doc)
     axios.put(`/api/users/${this.state.user_id}/documents/${id}`, {document: doc})
       .then( res => {
         const documents = this.state.documents.map( d => {

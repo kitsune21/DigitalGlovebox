@@ -8,13 +8,10 @@ import Profile from './Components/Shared/Profile';
 import NoMatch from './Components/Shared/NoMatch';
 import ConnectedDocuments from './Components/Documents/Documents';
 import FetchUser from './Components/Auth/FetchUser';
-import styled from 'styled-components';
+import { ConnectedDashboard } from './Components/Dashboard/dashboard';
+import ProtectedRoute from './Components/Auth/ProtectedRoute';
 
-const AppContainer = styled.div`
-  background: #000000;
-  color: #ffffff;
-  font: 
-  `
+import styled from 'styled-components';
 
 const App = () => (
   <>
@@ -26,8 +23,9 @@ const App = () => (
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
-          <Route exact path="/documents" component={ConnectedDocuments} />
-          <Route exact path="/profile" component={Profile} />
+          <ProtectedRoute exact path="/dashboard" component={ConnectedDashboard} />
+          <ProtectedRoute exact path="/documents" component={ConnectedDocuments} />
+          <ProtectedRoute exact path="/profile" component={Profile} />
           
           <Route component={NoMatch} />
         </Switch>
@@ -38,4 +36,3 @@ const App = () => (
 )
 
 export default App;
-
