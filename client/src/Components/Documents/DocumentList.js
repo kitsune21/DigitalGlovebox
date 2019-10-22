@@ -1,10 +1,22 @@
 import React, { Component } from 'react';
 import DocumentItem from './DocumentItem';
 import axios from 'axios';
+import { Card, Accordion, Icon } from 'semantic-ui-react';
 
 class DocumentList extends Component {
 
-  state = {document_types: [], custom_doc_types: []}
+  state = {document_types: [],
+          custom_doc_types: [],
+          activeIndex: 0,
+          }
+
+  handleClick = (e, titleProps) => {
+    const { index } = titleProps
+    const { activeIndex } = this.state
+    const newIndex = activeIndex === index ? -1 : index
+
+    this.setState({ activeIndex: newIndex })
+  }
 
   componentDidMount() {
     this.pullDocTypes();
@@ -18,15 +30,35 @@ class DocumentList extends Component {
   }
 
   renderDocTypes = () => {
+    const { activeIndex } = this.state
     return(
       this.state.document_types.map( type =>
         <div key={type.id} >
-          <h2>{type.name}</h2>
-          {
-            this.renderDocs(type.id).map( doc =>
-            <DocumentItem key={doc.id} myDocument={doc} deleteDocument={this.props.deleteDocument} updateDocument={this.props.updateDocument} />
-          )
-        }
+        <Accordion>
+          <Accordion.Title
+           active={activeIndex === 0}
+           index={0}
+           onClick={this.handleClick}
+         >
+           <h2>
+             <Icon name='dropdown' />
+             {type.name}
+           </h2>
+         </Accordion.Title>
+         <Accordion.Content active={activeIndex === 0}>
+           {
+             this.renderDocs(type.id).map( doc =>
+            <Card>
+             <DocumentItem
+             key={doc.id}
+             myDocument={doc}
+             deleteDocument={this.props.deleteDocument}
+             updateDocument={this.props.updateDocument}
+             />
+           </Card>)
+           }
+         </Accordion.Content>
+        </Accordion>
         </div>
       )
     )

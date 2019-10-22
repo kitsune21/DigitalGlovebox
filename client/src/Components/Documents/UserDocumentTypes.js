@@ -4,7 +4,7 @@ import { AuthConsumer } from '../../Providers/AuthProvider';
 import { withRouter, } from 'react-router-dom';
 import DocumentItem from './DocumentItem';
 import DocTypeForm from './DocTypeForm';
-import { Button } from 'semantic-ui-react';
+import { Button, Card } from 'semantic-ui-react';
 
 class UserDocumentTypes extends Component {
 
@@ -86,7 +86,9 @@ class UserDocumentTypes extends Component {
         }
           {
             this.renderDocs(type.id).map( doc =>
-            <DocumentItem key={doc.id} myDocument={doc} />
+            <Card>
+              <DocumentItem key={doc.id} myDocument={doc} />
+            </Card>
           )
         }
         </div>

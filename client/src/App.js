@@ -13,7 +13,7 @@ import styled from 'styled-components';
 const AppContainer = styled.div`
   background: #000000;
   color: #ffffff;
-  font: 
+  height: 100%;
   `
 
 const App = () => (
@@ -28,7 +28,7 @@ const App = () => (
           <Route exact path="/register" component={Register} />
           <Route exact path="/documents" component={ConnectedDocuments} />
           <Route exact path="/profile" component={Profile} />
-          
+
           <Route component={NoMatch} />
         </Switch>
       </FetchUser>
@@ -38,4 +38,3 @@ const App = () => (
 )
 
 export default App;
-
