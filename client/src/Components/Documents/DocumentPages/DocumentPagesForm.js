@@ -5,40 +5,44 @@ import axios from 'axios';
 
 export class DocumentPagesForm extends Component {
 
-  state = { front_img: '', document_id: 0}
+  state = { front_img: '', document_id: 0, files: []}
 
   componentDidMount() {
     this.setState({document_id: this.props.document_id})
   }
 
-  onDrop = (files) => {
-    console.log(files)
-    this.setState({ front_img: files[0]})
-  }
+  onDrop = (droppedFiles) => {
+    this.setState({ files: [...this.state.files, droppedFiles]})
+  } 
 
   handleSubmit = () => {
     if(!this.props.id){
-      this.addPage(this.state)
+      this.addPage()
       this.props.setAddPages()
     } else {
-      console.log('oh hi')
       this.updatePage(this.state)
     }
-    
   }
 
-  addPage = (doc) => {
+  addPage = () => {
     const { document_id } = this.props;
-    let file = new FormData();
-    file.append("file", doc.front_img)
-    axios.post(`/api/documents/${document_id}/document_pages`, file)
-      .then( res => {
-        const { pages } = this.state;
-        this.setState({ pages: [...pages, res.data]})
-      })
-      .catch( res => {
-        console.log(res)
-      })
+    let postFile;
+    this.state.files.forEach( fileArray => 
+      {
+        fileArray.forEach( file => {
+          postFile = new FormData();
+          postFile.append("file", file)
+          axios.post(`/api/documents/${document_id}/document_pages`, postFile)
+          .then( res => {
+            const { pages } = this.state;
+            this.setState({ pages: [...pages, res.data]})
+          })
+          .catch( res => {
+            console.log(res)
+          })
+        })
+      }
+    )
   }
 
   updatePage = (doc) => {
@@ -57,6 +61,12 @@ export class DocumentPagesForm extends Component {
       })
   }
 
+  renderFileName = () => {
+    return(
+      this.state.files.forEach(file => <p>{file[0].path}</p>)  
+    )
+  }
+
   render() {
     return(
       <form onSubmit={this.handleSubmit}>
@@ -64,7 +74,7 @@ export class DocumentPagesForm extends Component {
         <div>
           <Dropzone
             onDrop={this.onDrop}
-            multiple={false}
+            multiple={true}
           >
             {({ getRootProps, getInputProps, isDragActive }) => {
               return (
@@ -82,6 +92,7 @@ export class DocumentPagesForm extends Component {
               )
             }}
           </Dropzone>
+          {this.state.files ? this.renderFileName() : null}
           <button>Add</button>
         </div>
       </form>

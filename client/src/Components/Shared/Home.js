@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ConnectedDashboard from '../Dashboard/dashboard';
 class Home extends Component {
 
   componentDidMount() {
@@ -10,7 +9,6 @@ class Home extends Component {
     return(
       <div>
         <h1>Digital Glovebox</h1>
-        <ConnectedDashboard />
       </div>
     )
   }

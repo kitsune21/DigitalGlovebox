@@ -6,6 +6,12 @@ import styled from 'styled-components';
 
 class Navbar extends React.Component {
 
+  renderLoginRegisterLink = () => {
+    return(
+      <li><Link to='/login' >Login</Link>/<Link to='/register'>Register</Link></li>
+    )
+  }
+
   rightNavItems = () => {
     const { auth: { user, handleLogout, }, location, } = this.props;
 
