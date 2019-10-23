@@ -48,9 +48,8 @@ class DocumentList extends Component {
          <Accordion.Content active={activeIndex === 0}>
            {
              this.renderDocs(type.id).map( doc =>
-            <Card style={{width: "500px", height: '500px'}}>
+            <Card key={doc.id} style={{width: "500px", height: '500px'}}>
              <DocumentItem
-             key={doc.id}
              myDocument={doc}
              deleteDocument={this.props.deleteDocument}
              updateDocument={this.props.updateDocument}

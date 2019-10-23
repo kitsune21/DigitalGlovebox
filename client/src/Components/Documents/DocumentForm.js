@@ -69,8 +69,6 @@ class DocumentForm extends Component {
  renderForm = (name) => {
    const { doc_type_id } = this.state;
    const isEnabled = name.length > 0 && doc_type_id !== '';
-   console.log(name.length)
-   console.log(doc_type_id.length)
    return(
     <Form onSubmit={this.handleSubmit}>
       <h3>Add Document</h3>
