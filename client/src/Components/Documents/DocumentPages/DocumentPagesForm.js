@@ -21,7 +21,8 @@ export class DocumentPagesForm extends Component {
       this.addPage()
       this.props.setAddPages()
     } else {
-      this.updatePage(this.state)
+      this.updatePage()
+      this.props.toggleEdit();
     }
   }
 
@@ -35,8 +36,7 @@ export class DocumentPagesForm extends Component {
           postFile.append("file", file)
           axios.post(`/api/documents/${document_id}/document_pages`, postFile)
           .then( res => {
-            const { pages } = this.state;
-            this.setState({ pages: [...pages, res.data]})
+            this.setState({files: []})
           })
           .catch( res => {
             console.log(res)
@@ -46,26 +46,33 @@ export class DocumentPagesForm extends Component {
     )
   }
 
-  updatePage = (doc) => {
-    const { document_id } = this.props;
-    console.log(doc)
-    let file = new FormData();
-    file.append("file", doc.front_img)
-    console.log(file.get("file"))
-    axios.put(`/api/documents/${document_id}/document_pages/${this.props.id}`, file)
-      .then( res => {
-        const { pages } = this.state;
-        this.setState({ pages: [...pages, res.data]})
-      })
-      .catch( res => {
-        console.log(res)
-      })
+  updatePage = () => {
+    const { document_id, doc_page_id } = this.props;
+    let postFile;
+    console.log('hi')
+    this.state.files.forEach( fileArray => 
+      {
+        fileArray.forEach( file => {
+          postFile = new FormData();
+          postFile.append("file", file)
+          axios.put(`/api/documents/${document_id}/document_pages/${doc_page_id}`, postFile)
+          .then( res => {
+            this.setState({ files: []})
+          })
+          .catch( res => {
+            console.log(res)
+          })
+        })
+      }
+    )
   }
 
-  renderFileName = () => {
-    return(
-      this.state.files.forEach(file => <p>{file[0].path}</p>)  
-    )
+  multiOrSingle = () => {
+    if(this.props.doc_page_id) {
+      return false
+    } else {
+      return true
+    }
   }
 
   render() {
@@ -75,7 +82,7 @@ export class DocumentPagesForm extends Component {
         <div>
           <Dropzone
             onDrop={this.onDrop}
-            multiple={true}
+            multiple={this.multiOrSingle()}
           >
             {({ getRootProps, getInputProps, isDragActive }) => {
               return (
@@ -93,8 +100,7 @@ export class DocumentPagesForm extends Component {
               )
             }}
           </Dropzone>
-          {this.state.files ? this.renderFileName() : null}
-          <Button type='submit'>Add</Button>
+          <Button type='submit'>Submit</Button>
         </div>
       </Form>
     )
