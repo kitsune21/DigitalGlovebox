@@ -29,6 +29,7 @@ class DocTypeForm extends Component {
 
   render() {
     const { name } = this.state
+    let isEnabled = name.length > 0
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Input
@@ -39,7 +40,7 @@ class DocTypeForm extends Component {
           value={name}
           onChange={this.handleChange}
         />
-        <Form.Button color='green'>Submit</Form.Button>
+        <Form.Button disabled={!isEnabled} color='green'>Submit</Form.Button>
       </Form>
     )
   }
