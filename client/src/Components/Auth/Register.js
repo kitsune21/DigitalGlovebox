@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 class Register extends React.Component {
   state = { email: '', password: '', passwordConfirmation: '', };
-  
+
   handleSubmit = (e) => {
     e.preventDefault();
     const { email, password, passwordConfirmation } = this.state;
@@ -16,12 +16,12 @@ class Register extends React.Component {
     else
       alert('Passwords Do Not Match!')
   }
-  
+
   handleChange = (e) => {
     const { name, value, } = e.target;
     this.setState({ [name]: value, });
   }
-  
+
   render() {
     const { email, password, passwordConfirmation, } = this.state;
 

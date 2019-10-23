@@ -5,13 +5,13 @@ import styled from 'styled-components';
 
 class Login extends React.Component {
   state = { email: '', password: '' }
-  
+
   handleSubmit = (e) => {
     e.preventDefault();
     const { email, password, } = this.state;
     this.props.auth.handleLogin({ email, password, }, this.props.history);
   }
-  
+
   handleChange = (e) => {
     const { name, value, } = e.target;
     this.setState({ [name]: value, });
@@ -27,11 +27,9 @@ class Login extends React.Component {
     left: 35%;
     `;
 
-  
     return (
      
       <Segment basic>
-
       <Header style={{color:'white'}} as='h1' textAlign='center'>Login</Header>
         <Wrapper>
         <Form inverted onSubmit={this.handleSubmit}>
