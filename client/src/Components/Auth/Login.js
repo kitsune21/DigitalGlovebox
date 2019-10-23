@@ -17,12 +17,16 @@ class Login extends React.Component {
     this.setState({ [name]: value, });
   }
 
-  render() {
+  render() { 
     const { email, password, } = this.state;
+    const Button = styled.button`
+    color: #000000;`
   
     return (
       <Segment basic>
+
         <Header as='h1' textAlign='center'>Login</Header>
+       
         <Form onSubmit={this.handleSubmit}>
           <Form.Input
             label="Email"
