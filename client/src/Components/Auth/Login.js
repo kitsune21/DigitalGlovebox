@@ -19,10 +19,19 @@ class Login extends React.Component {
 
   render() { 
     const { email, password, } = this.state;
-   
+
+    const Wrapper = styled.section`
+    width: 350px;
+    height: 300px;
+    position: relative;
+    left: 35%;
+    `;
+
     return (
+     
       <Segment basic>
-        <Header style={{color:'white'}} as='h1' textAlign='center'>Login</Header>
+      <Header style={{color:'white'}} as='h1' textAlign='center'>Login</Header>
+        <Wrapper>
         <Form inverted onSubmit={this.handleSubmit}>
           <Form.Input
             autoFocus
@@ -47,7 +56,9 @@ class Login extends React.Component {
             <Button primary type='submit'>Submit</Button>
           </Segment>
         </Form>
+        </Wrapper>
       </Segment>
+      
     )
   }
 }
