@@ -7,27 +7,34 @@ const AppContainer = styled.div`
   color: #ffffff;
   font: #ffffff;
   `
-  const Title = styled.h1`
+const Title = styled.h1`
   font-size: 1.2em;
   text-align: center;
   color: #000000;
   font-family: arial;
 `;
 const Wrapper = styled.section`
-  display: flex;
-  justify-content: center;
-  padding: 3em;
+border-radius:5px;
   background: #F8F8F8;
-  margin: 2em;
+  margin: 0 auto;
+  margin-bottom:2em;
   border: 3px 'green';
-  margin-right: 15em;
-  margin-left: 15em;
+  width: 350px;
+  height: 100px;
+  position: relative;
 `;
+
+const CarContentWrap = styled.section`
+position: relative;
+left: 45%;
+  margin-left: -50px;
+`;
+
 
 const Button = styled.button`
   background: white;
-  margin: auto, 0;
-  // text-align: center;
+  margin: 5px;
+  text-align: center;
   color: black;
   font-size: 16px;
   :disabled {
@@ -39,24 +46,21 @@ const Button = styled.button`
 const CarItem = ({car, deleteCar, updateCar, toggleEditing, editing, toggleLoading}) => (  
   <>
   { !editing ? 
-    <div>
+    <div width="100%">
       
       <Wrapper>
       <div>
-        <Title>
-        <p>{car.make} {car.model} {car.year} </p>
-        </Title><br />
-       </div>
-        <Button>
-       < button onClick={() => deleteCar(car.id)}>Delete</button>
-        </Button>
-        <Button>
-      < button onClick={() => toggleEditing()}>Edit</button>
-      </Button>
+      <Title>
+      <p>{car.make} {car.model} {car.year} </p>
+      </Title><br />
+      </div>
+      <CarContentWrap>
+      < Button onClick={() => deleteCar(car.id)}>Delete</Button>
+      <Button onClick={() => toggleEditing()}>Edit</Button>
+      </CarContentWrap>
+
      </Wrapper>
 
-      {/* <button onClick={() => deleteCar(car.id)}>Delete</button>
-      <button onClick={() => toggleEditing()}>Edit</button> */}
     </div>
   :
   <CarForm id={car.id} car={car} updateCar={updateCar} toggleLoading={toggleLoading} toggleEditing={toggleEditing}/>

@@ -17,25 +17,26 @@ class Login extends React.Component {
     this.setState({ [name]: value, });
   }
 
-  render() {
+  render() { 
     const { email, password, } = this.state;
-
+   
     return (
       <Segment basic>
         <Header style={{color:'white'}} as='h1' textAlign='center'>Login</Header>
         <Form inverted onSubmit={this.handleSubmit}>
           <Form.Input
-            label="Email"
             autoFocus
+            label='email'
             required
             name='email'
             value={email}
             placeholder='Email'
             onChange={this.handleChange}
           />
+
           <Form.Input
-            label="Password"
             required
+            label='password'
             name='password'
             value={password}
             placeholder='Password'
