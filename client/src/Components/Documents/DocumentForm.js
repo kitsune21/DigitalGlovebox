@@ -35,7 +35,7 @@ class DocumentForm extends Component {
 
  handleSubmit = (e) => {
    e.preventDefault();
-   
+
    if (this.props.id) {
      this.props.update(this.props.id, this.state)
      this.props.toggleEdit()
@@ -54,7 +54,23 @@ class DocumentForm extends Component {
    return myTypes;
  }
 
+  validationAlerts = () =>{
+    const { name, doc_type_id } = this.state
+    let invalidName = alert("Name must not be blank")
+    let invalidDocType = alert("Doc type must not be blank")
+    if (name.length == 0) {
+      return(invalidName)
+    }
+    if (doc_type_id == ''){
+      return(invalidDocType)
+    }
+  }
+
  renderForm = (name) => {
+   const { doc_type_id } = this.state;
+   const isEnabled = name.length > 0 && doc_type_id !== '';
+   console.log(name.length)
+   console.log(doc_type_id.length)
    return(
     <Form onSubmit={this.handleSubmit}>
       <h3>Add Document</h3>
@@ -75,7 +91,7 @@ class DocumentForm extends Component {
       options={this.setDocTypes()}
       onChange={this.handleSelection}
       />
-      <Button type='submit'>Submit</Button>
+      <Button onClick={() => this.validationAlerts} disabled={!isEnabled} type='submit'>Submit</Button>
     </Form>
    )
  }
@@ -90,4 +106,4 @@ class DocumentForm extends Component {
    }
   }
 
-  export default DocumentForm; 
+  export default DocumentForm;

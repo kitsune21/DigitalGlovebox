@@ -34,30 +34,31 @@ class DocumentList extends Component {
     return(
       this.state.document_types.map( type =>
         <div key={type.id} >
-          <Accordion>
-            <Accordion.Title
-            active={activeIndex === 0}
-            index={0}
-            onClick={this.handleClick}
-          >
-            <h2>
-              <Icon name='dropdown' />
-              {type.name}
-            </h2>
-          </Accordion.Title>
-          <Accordion.Content active={activeIndex === 0}>
-            {
-              this.renderDocs(type.id).map( doc =>
-              <Card key={doc.id}>
-              <DocumentItem
-              myDocument={doc}
-              deleteDocument={this.props.deleteDocument}
-              updateDocument={this.props.updateDocument}
-              />
-            </Card>)
-            }
-          </Accordion.Content>
-          </Accordion>
+        <Accordion>
+          <Accordion.Title
+           active={activeIndex === 0}
+           index={0}
+           onClick={this.handleClick}
+         >
+           <h2>
+             <Icon name='dropdown' />
+             {type.name}
+           </h2>
+         </Accordion.Title>
+         <Accordion.Content active={activeIndex === 0}>
+           {
+             this.renderDocs(type.id).map( doc =>
+            <Card style={{width: "500px", height: '500px'}}>
+             <DocumentItem
+             key={doc.id}
+             myDocument={doc}
+             deleteDocument={this.props.deleteDocument}
+             updateDocument={this.props.updateDocument}
+             />
+           </Card>)
+           }
+         </Accordion.Content>
+        </Accordion>
         </div>
       )
     )
