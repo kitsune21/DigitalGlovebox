@@ -13,8 +13,8 @@ class DocumentItem extends Component {
     return (
       <div>
         <p>{ myDocument.name }</p>
-        <button onClick={() => deleteDocument(myDocument.id)}>Delete</button>
-        <button onClick={() => this.toggleFormOpen()}>Edit</button>
+        <button style={{color:'red'}} onClick={() => deleteDocument(myDocument.id)}><Icon name='trash'/></button>
+        <button style={{color:'blue'}} onClick={() => this.toggleFormOpen()}><Icon name='pencil'/></button>
         {
           this.state.formOpen &&
           <DocumentForm {...myDocument}
