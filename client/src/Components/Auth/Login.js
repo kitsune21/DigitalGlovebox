@@ -5,13 +5,13 @@ import styled from 'styled-components';
 
 class Login extends React.Component {
   state = { email: '', password: '' }
-  
+
   handleSubmit = (e) => {
     e.preventDefault();
     const { email, password, } = this.state;
     this.props.auth.handleLogin({ email, password, }, this.props.history);
   }
-  
+
   handleChange = (e) => {
     const { name, value, } = e.target;
     this.setState({ [name]: value, });
@@ -19,28 +19,24 @@ class Login extends React.Component {
 
   render() { 
     const { email, password, } = this.state;
-    const Button = styled.button`
-    color: #000000;`
-  
+   
     return (
       <Segment basic>
-
-        <Header as='h1' textAlign='center'>Login</Header>
-       
-        <Form onSubmit={this.handleSubmit}>
-          <p color='white'>Email</p>
+        <Header style={{color:'white'}} as='h1' textAlign='center'>Login</Header>
+        <Form inverted onSubmit={this.handleSubmit}>
           <Form.Input
             autoFocus
-            required         
+            label='email'
+            required
             name='email'
             value={email}
             placeholder='Email'
             onChange={this.handleChange}
           />
 
-          <p color='white'>Password</p>
           <Form.Input
             required
+            label='password'
             name='password'
             value={password}
             placeholder='Password'

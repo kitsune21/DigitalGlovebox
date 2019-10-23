@@ -58,10 +58,10 @@ class DocumentForm extends Component {
     const { name, doc_type_id } = this.state
     let invalidName = alert("Name must not be blank")
     let invalidDocType = alert("Doc type must not be blank")
-    if (name.length == 0) {
+    if (name.length === 0) {
       return(invalidName)
     }
-    if (doc_type_id == ''){
+    if (doc_type_id === ''){
       return(invalidDocType)
     }
   }
