@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import { Form, Button, Modal, Dimmer, Loader } from 'semantic-ui-react';
 import axios from 'axios';
+import styled from 'styled-components';
+
+const Wrapper = styled.section`
+   width: 350px;
+   height: 300px;
+   position: relative;
+   left: 36%;
+   `;
 
 class CarForm extends Component {
  state = { year: "", make: "", model: "", mileage: "", vin: "", modalOpen: false, loading: false, buttonActive: false }
@@ -112,8 +120,9 @@ class CarForm extends Component {
    const { year, make, model, mileage } = this.state
    return (
      <>
+     
       <Modal 
-        trigger={<Button onClick={this.handleOpen}>Add From VIN #</Button>}
+        trigger={<Button onClick={this.handleOpen}>Add By VIN #</Button>}
         open={this.state.modalOpen}
         onClose={this.handleClose}
         closeIcon
@@ -125,8 +134,10 @@ class CarForm extends Component {
           {!this.state.loading ? this.renderVINForm() : this.renderVINLoader()}
         </Modal.Content>
         </Modal>
-        <Form onSubmit={this.handleSubmit}>
 
+       <Wrapper>
+
+        <Form inverted onSubmit={this.handleSubmit}>
           <Form.Input
             required
             type='number'
@@ -166,7 +177,8 @@ class CarForm extends Component {
             />
             <Button type='submit'>Submit</Button>
           </Form>
-      </>
+          </Wrapper>
+          </>
     )
    }
   }
