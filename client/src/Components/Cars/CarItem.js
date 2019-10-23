@@ -1,6 +1,7 @@
 import React from 'react';
 import CarForm from './CarForm';
 import styled from 'styled-components';
+import { Icon } from 'semantic-ui-react';
 
 const AppContainer = styled.div`
   background: #000000;
@@ -43,11 +44,11 @@ const Button = styled.button`
 
 
 
-const CarItem = ({car, deleteCar, updateCar, toggleEditing, editing, toggleLoading}) => (  
+const CarItem = ({car, deleteCar, updateCar, toggleEditing, editing, toggleLoading}) => (
   <>
-  { !editing ? 
+  { !editing ?
     <div width="100%">
-      
+
       <Wrapper>
       <div>
       <Title>
@@ -55,8 +56,8 @@ const CarItem = ({car, deleteCar, updateCar, toggleEditing, editing, toggleLoadi
       </Title><br />
       </div>
       <CarContentWrap>
-      < Button onClick={() => deleteCar(car.id)}>Delete</Button>
-      <Button onClick={() => toggleEditing()}>Edit</Button>
+      < Button style={{color:'red'}} onClick={() => deleteCar(car.id)}><Icon name='trash'/></Button>
+      <Button style={{color:'blue'}} onClick={() => toggleEditing()}><Icon name='pencil'/></Button>
       </CarContentWrap>
 
      </Wrapper>

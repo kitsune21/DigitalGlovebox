@@ -58,10 +58,10 @@ class DocumentForm extends Component {
     const { name, doc_type_id } = this.state
     let invalidName = alert("Name must not be blank")
     let invalidDocType = alert("Doc type must not be blank")
-    if (name.length == 0) {
+    if (name.length === 0) {
       return(invalidName)
     }
-    if (doc_type_id == ''){
+    if (doc_type_id === ''){
       return(invalidDocType)
     }
   }
@@ -69,8 +69,6 @@ class DocumentForm extends Component {
  renderForm = (name) => {
    const { doc_type_id } = this.state;
    const isEnabled = name.length > 0 && doc_type_id !== '';
-   console.log(name.length)
-   console.log(doc_type_id.length)
    return(
     <Form onSubmit={this.handleSubmit}>
       <h3>Add Document</h3>

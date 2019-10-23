@@ -11,7 +11,7 @@ const Wrapper = styled.section`
    `;
 
 class CarForm extends Component {
- state = { year: "", make: "", model: "", mileage: "", vin: "", modalOpen: false, loading: false }
+ state = { year: "", make: "", model: "", mileage: "", vin: "", modalOpen: false, loading: false, buttonActive: false }
 
  componentDidMount() {
    if (this.props.id) {
@@ -22,6 +22,9 @@ class CarForm extends Component {
  handleChange = (e) => {
    const { name, value } = e.target
    this.setState({ [name]: value })
+   if(this.state.vin.length >= 17) {
+     this.setState({buttonActive: !this.state.buttonActive})
+   }
  }
 
  handleSubmit = (e) => {
@@ -48,6 +51,9 @@ class CarForm extends Component {
     .then( res => {
       this.setCarInfo(res.data);
       this.setState({ modalOpen: false })
+    })
+    .catch( res => {
+      this.setState({error: true})
     })
  }
 
@@ -78,21 +84,26 @@ class CarForm extends Component {
  }
 
  handleClose = () => {
-   this.setState({loading: true})
-  this.getCarInfo();
+  if(this.state.vin.length === 17) {
+    this.setState({loading: true})
+    this.getCarInfo();
+  } else {
+    this.setState({vin: '', error: false })
+  }
  }
 
  renderVINForm = () => {
    const { vin } = this.state;
   return(
     <Form onSubmit={this.getCarInfo}>
+      {this.state.error ? <p>Invalid Vin</p> : null}
       <Form.Input
         placeholder='VIN'
         label='vin'
         name='vin'
         value={vin}
         onChange={this.handleChange}/>
-      <Button onClick={this.handleClose}>Submit</Button>
+      <Button disabled={!this.state.buttonActive} onClick={this.handleClose}>Submit</Button>
     </Form>
   )
  }
@@ -106,7 +117,7 @@ class CarForm extends Component {
  }
 
  render() {
-   const { year, make, model, mileage, vin } = this.state
+   const { year, make, model, mileage } = this.state
    return (
      <>
      
@@ -114,8 +125,8 @@ class CarForm extends Component {
         trigger={<Button onClick={this.handleOpen}>Add By VIN #</Button>}
         open={this.state.modalOpen}
         onClose={this.handleClose}
-      > 
-    
+        closeIcon
+      >
         <Modal.Header>
           Car VIN #
         </Modal.Header>

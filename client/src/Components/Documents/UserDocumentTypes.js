@@ -4,7 +4,7 @@ import { AuthConsumer } from '../../Providers/AuthProvider';
 import { withRouter, } from 'react-router-dom';
 import DocumentItem from './DocumentItem';
 import DocTypeForm from './DocTypeForm';
-import { Button, Card } from 'semantic-ui-react';
+import { Button, Card, Icon } from 'semantic-ui-react';
 
 class UserDocumentTypes extends Component {
 
@@ -76,11 +76,11 @@ class UserDocumentTypes extends Component {
           /> :
           <>
           <h2>{type.name}</h2>
-          <Button onClick={this.toggleEdit}>
-            Edit
+          <Button style={{color:'red'}} onClick={ () => this.deleteDocType(type.id) }>
+            <Icon name='trash'/>
           </Button>
-          <Button onClick={ () => this.deleteDocType(type.id) }>
-            Delete
+          <Button style={{color:'blue'}} onClick={this.toggleEdit}>
+            <Icon name='pencil'/>
           </Button>
           </>
         }
