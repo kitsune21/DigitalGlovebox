@@ -86,8 +86,8 @@ class UserDocumentTypes extends Component {
         }
           {
             this.renderDocs(type.id).map( doc =>
-            <Card>
-              <DocumentItem key={doc.id} myDocument={doc} />
+            <Card key={doc.id}>
+              <DocumentItem myDocument={doc} />
             </Card>
           )
         }

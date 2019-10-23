@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Form, Button, Modal } from 'semantic-ui-react';
+import { Form, Button, Modal, Dimmer, Loader } from 'semantic-ui-react';
 import axios from 'axios';
 
 class CarForm extends Component {
- state = { year: "", make: "", model: "", mileage: "", vin: "", modalOpen: false }
+ state = { year: "", make: "", model: "", mileage: "", vin: "", modalOpen: false, loading: false }
 
  componentDidMount() {
    if (this.props.id) {
@@ -39,6 +39,7 @@ class CarForm extends Component {
    })
     .then( res => {
       this.setCarInfo(res.data);
+      this.setState({ modalOpen: false })
     })
  }
 
@@ -64,11 +65,36 @@ class CarForm extends Component {
   })
  }
 
- handleOpen = () => this.setState({ modalOpen: true })
+ handleOpen = () => {
+   this.setState({ modalOpen: true, loading: false })
+ }
 
  handleClose = () => {
-  this.setState({ modalOpen: false })
+   this.setState({loading: true})
   this.getCarInfo();
+ }
+
+ renderVINForm = () => {
+   const { vin } = this.state;
+  return(
+    <Form onSubmit={this.getCarInfo}>
+      <Form.Input
+        placeholder='VIN'
+        label='vin'
+        name='vin'
+        value={vin}
+        onChange={this.handleChange}/>
+      <Button onClick={this.handleClose}>Submit</Button>
+    </Form>
+  )
+ }
+
+ renderVINLoader = () => {
+  return(
+    <Dimmer active>
+      <Loader>Loading</Loader>
+    </Dimmer>
+  )
  }
 
  render() {
@@ -84,15 +110,7 @@ class CarForm extends Component {
           Car VIN #
         </Modal.Header>
         <Modal.Content>
-          <Form onSubmit={this.getCarInfo}>
-            <Form.Input
-              placeholder='VIN'
-              label='vin'
-              name='vin'
-              value={vin}
-              onChange={this.handleChange}/>
-            <Button onClick={this.handleClose}>Submit</Button>
-          </Form>
+          {!this.state.loading ? this.renderVINForm() : this.renderVINLoader()}
         </Modal.Content>
         </Modal>
         <Form onSubmit={this.handleSubmit}>
