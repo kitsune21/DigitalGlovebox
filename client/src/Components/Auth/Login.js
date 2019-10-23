@@ -28,8 +28,8 @@ class Login extends React.Component {
         <Header as='h1' textAlign='center'>Login</Header>
        
         <Form onSubmit={this.handleSubmit}>
+          <p color='white'>Email</p>
           <Form.Input
-            label="Email"
             autoFocus
             required         
             name='email'
@@ -37,8 +37,9 @@ class Login extends React.Component {
             placeholder='Email'
             onChange={this.handleChange}
           />
+
+          <p color='white'>Password</p>
           <Form.Input
-            label="Password"
             required
             name='password'
             value={password}
