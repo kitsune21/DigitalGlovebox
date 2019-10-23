@@ -36,7 +36,6 @@ class Register extends React.Component {
             placeholder='Email'
             onChange={this.handleChange}
           />
-          <p color='white'>Password*</p>
           <Form.Input
             label='password'
             name='password'
@@ -45,8 +44,8 @@ class Register extends React.Component {
             type='password'
             onChange={this.handleChange}
           />
-          <p color='white'>Confirm Password*</p>
           <Form.Input
+            label='confirm password'
             name='passwordConfirmation'
             value={passwordConfirmation}
             placeholder='Password Confirmation'
