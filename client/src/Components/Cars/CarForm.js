@@ -88,7 +88,7 @@ class CarForm extends Component {
     this.setState({loading: true})
     this.getCarInfo();
   } else {
-    this.setState({vin: '', error: false })
+    this.setState({vin: '', error: false, modalOpen: false })
   }
  }
 
