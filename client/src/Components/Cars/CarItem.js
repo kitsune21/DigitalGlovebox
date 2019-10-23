@@ -7,7 +7,7 @@ const AppContainer = styled.div`
   color: #ffffff;
   font: #ffffff;
   `
-  const Title = styled.h1`
+const Title = styled.h1`
   font-size: 1.2em;
   text-align: center;
   color: #000000;

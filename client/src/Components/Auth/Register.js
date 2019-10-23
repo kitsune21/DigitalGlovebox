@@ -28,27 +28,24 @@ class Register extends React.Component {
       <Segment basic>
         <Header as='h1' textAlign='center'>Register</Header>
         <Form onSubmit={this.handleSubmit}>
+        <p color='white'>Email*</p>
           <Form.Input
-            label="Email"
-            required
             autoFocus
             name='email'
             value={email}
             placeholder='Email'
             onChange={this.handleChange}
           />
+          <p color='white'>Password*</p>
           <Form.Input
-            label="Password"
-            required
             name='password'
             value={password}
             placeholder='Password'
             type='password'
             onChange={this.handleChange}
           />
+          <p color='white'>Confirm Password*</p>
           <Form.Input
-            label="Password Confirmation"
-            required
             name='passwordConfirmation'
             value={passwordConfirmation}
             placeholder='Password Confirmation'
