@@ -7,7 +7,7 @@ import CarForm from '../Cars/CarForm';
 import styled from 'styled-components';
 
 const Button = styled.button`
-   color: #2E8536;`
+   color: ##1C2226;`
 
 class Dashboard extends Component {
   state = { cars: [], adding: false, editing: false};

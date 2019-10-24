@@ -1,6 +1,6 @@
 import React from 'react';
 import { AuthConsumer, } from '../../Providers/AuthProvider';
-import { Button, Form, Segment, Header, } from 'semantic-ui-react';
+import { Button, Form, Segment, Header, Card } from 'semantic-ui-react';
 import styled from 'styled-components';
 
 class Login extends React.Component {
@@ -20,21 +20,13 @@ class Login extends React.Component {
   render() { 
     const { email, password, } = this.state;
 
-    const Wrapper = styled.section`
-    width: 350px;
-    height: 300px;
-    position: relative;
-    left: 35%;
-    `;
-
     return (
      
-      <Segment basic>
-      <Header style={{color:'white'}} as='h1' textAlign='center'>Login</Header>
-        <Wrapper>
+      <Segment style={{marginLeft: 275}} basic>
+      <Header style={{color:'white'}} as='h3'>Login</Header>
         <Form inverted onSubmit={this.handleSubmit}>
           <Form.Input
-            autoFocus
+            style={{width: 575}}
             label='email'
             required
             name='email'
@@ -42,21 +34,21 @@ class Login extends React.Component {
             placeholder='Email'
             onChange={this.handleChange}
           />
-
+          
           <Form.Input
-            required
+            style={{width: 575}}
             label='password'
+            required
             name='password'
             value={password}
             placeholder='Password'
             type='password'
             onChange={this.handleChange}
           />
-          <Segment textAlign='center' basic>
+          <Segment style={{marginLeft: 230}} basic>
             <Button primary type='submit'>Submit</Button>
           </Segment>
         </Form>
-        </Wrapper>
       </Segment>
       
     )

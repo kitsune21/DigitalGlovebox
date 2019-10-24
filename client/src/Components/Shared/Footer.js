@@ -14,6 +14,7 @@ class Footer extends React.Component {
   render(){
     return(
       <FooterStyle>©2019 DevPoint Studio LLC</FooterStyle>
+
     )
   }
 }

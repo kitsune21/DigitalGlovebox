@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import DocumentItem from './DocumentItem';
 import axios from 'axios';
-import { Card, Accordion, Icon } from 'semantic-ui-react';
+import ConnectedDocumentTypes from './UserDocumentTypes';
+import { Card, Accordion, Icon, Tab } from 'semantic-ui-react';
 
 class DocumentList extends Component {
 
@@ -29,38 +30,24 @@ class DocumentList extends Component {
       })
   }
 
-  renderDocTypes = () => {
-    const { activeIndex } = this.state
-    return(
-      this.state.document_types.map( type =>
-        <div key={type.id} >
-        <Accordion>
-          <Accordion.Title
-           active={activeIndex === 0}
-           index={0}
-           onClick={this.handleClick}
-         >
-           <h2>
-             <Icon name='dropdown' />
-             {type.name}
-           </h2>
-         </Accordion.Title>
-         <Accordion.Content active={activeIndex === 0}>
-           {
-             this.renderDocs(type.id).map( doc =>
-            <Card key={doc.id} style={{width: "500px", height: '500px'}}>
-             <DocumentItem
-             myDocument={doc}
-             deleteDocument={this.props.deleteDocument}
-             updateDocument={this.props.updateDocument}
-             />
-           </Card>)
-           }
-         </Accordion.Content>
-        </Accordion>
-        </div>
-      )
-    )
+  renderTabs = () => {
+    let panes = this.state.document_types.map( type => {
+      return({
+        menuItem: type.name,
+        render: () => <Tab.Pane attached={false}>{
+          this.renderDocs(type.id).map( doc =>
+         <Card key={doc.id} style={{width: "100%"}}>
+          <DocumentItem
+          myDocument={doc}
+          deleteDocument={this.props.deleteDocument}
+          updateDocument={this.props.updateDocument}
+          />
+        </Card>)
+        }</Tab.Pane>
+      })
+    })
+    panes.push({menuItem: 'Others', render: () => <Tab.Pane attached={false}><ConnectedDocumentTypes documents={this.props.documents}/></Tab.Pane>})
+    return panes;
   }
 
   renderDocs = (id) => {
@@ -78,7 +65,7 @@ class DocumentList extends Component {
   render() {
     return(
       <div>
-        {this.renderDocTypes()}
+        <Tab menu={{ secondary: true, pointing: true }} panes={this.renderTabs()} />
       </div>
     )
   }

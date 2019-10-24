@@ -14,6 +14,7 @@ const FormWrapper = styled.div`
   margin-bottom: 25px;
   margin-left: 550px;`
 
+
 class Profile extends Component {
   state = { editing: false, formValues: { name: '', email: '', file: '', }, };
 
@@ -101,6 +102,7 @@ class Profile extends Component {
     return (
       <>
       <FormWrapper> <br /><h1 align='center'>Account Settings</h1>
+
         <br />
           <div>
             { editing ? this.editView() : this.profileView()}
