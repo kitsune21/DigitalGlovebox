@@ -15,7 +15,7 @@ class CarForm extends Component {
 
  componentDidMount() {
    if (this.props.id) {
-     this.setState({ year: this.props.car.year, make: this.props.car.make, model: this.props.car.model, mileage: this.props.car.mileage })
+     this.setState({ year: this.props.car.year, make: this.props.car.make, model: this.props.car.model, mileage: this.props.car.mileage, VIN: this.props.car.vin, license_plate: this.props.car.license_plate})
    }
  }
 
@@ -65,13 +65,16 @@ class CarForm extends Component {
     } 
     switch(info.Variable) {
       case "Make":
-        this.setState({make: info.Value})
+        this.setState({Make: info.Value})
         break;
       case "Model Year":
-        this.setState({year: info.Value})
+        this.setState({Year: info.Value})
         break;
       case "Model":
-        this.setState({model: info.Value})
+        this.setState({Model: info.Value})
+        break; 
+      case "license_plate":
+        this.setState({license_plate: info.Value})
         break;
       default:
         break;
@@ -117,7 +120,7 @@ class CarForm extends Component {
  }
 
  render() {
-   const { year, make, model, mileage } = this.state
+   const { year, make, model, mileage, vin, license_plate } = this.state
    return (
      <>
      
@@ -175,6 +178,16 @@ class CarForm extends Component {
             value={mileage}
             onChange={this.handleChange}
             />
+
+            <Form.Input
+              type='number'
+            placeholder='license_plate'
+            label='license_plate'
+            name='license_plate'
+            value={license_plate}
+            onChange={this.handleChange}
+            />
+
             <Button type='submit'>Submit</Button>
           </Form>
           </Wrapper>
