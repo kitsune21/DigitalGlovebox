@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Icon } from 'semantic-ui-react';
 
 const AppContainer = styled.div`
-  background: #000000;
+  background: #1C2226;
   color: #ffffff;
   font: #ffffff;
   `

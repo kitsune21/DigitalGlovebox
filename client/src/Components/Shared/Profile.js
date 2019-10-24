@@ -1,8 +1,18 @@
 import React, { Component } from 'react';
 import { AuthConsumer, } from "../../Providers/AuthProvider";
 import Dropzone from 'react-dropzone';
+import styled from 'styled-components';
+import { Form } from "semantic-ui-react";
 
-const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
+const FormWrapper = styled.div`
+  align: 'center';
+  background: #FFFFFF;
+  color: #000000;
+  width: 350px;
+  height: 450px;
+  margin-top: 35px;
+  margin-bottom: 25px;
+  margin-left: 400px;`
 
 class Profile extends Component {
   state = { editing: false, formValues: { name: '', email: '', file: '', }, };
@@ -52,9 +62,6 @@ class Profile extends Component {
     return (
       <>
         <div>
-          <img width='25%' alt='Pretty' src={user.image || defaultImage} />
-        </div>
-        <div>
           <h2>{user.name}</h2>
           <h2>{user.email}</h2>
         </div>
@@ -67,29 +74,8 @@ class Profile extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <div>
-          <Dropzone
-            onDrop={this.onDrop}
-            multiple={false}
-          >
-            {({ getRootProps, getInputProps, isDragActive }) => {
-              return (
-                <div
-                  {...getRootProps()}
-                  style={styles.dropzone}
-                >
-                  <input {...getInputProps()} />
-                  {
-                    isDragActive ?
-                      <p>Drop files here...</p> :
-                      <p>Try dropping some files here, or click to select files to upload.</p>
-                  }
-                </div>
-              )
-            }}
-          </Dropzone>
-        </div>
-        <div>
           <input
+            autofocus
             label="Name"
             name="name"
             value={name}
@@ -97,6 +83,7 @@ class Profile extends Component {
             onChange={this.handleChange}
           />
           <input
+            autofocus
             label="Email"
             name="email"
             value={email}
@@ -113,32 +100,32 @@ class Profile extends Component {
     const { editing, } = this.state;
     return (
       <>
+      <FormWrapper> <br /><h3 align='center'>Account Settings</h3>
         <br />
-        <div>
           <div>
             { editing ? this.editView() : this.profileView()}
             <div>
               <button onClick={this.toggleEdit}>{editing ? 'Cancel' : 'Edit'}</button>
             </div>
           </div>
-        </div>
+          </FormWrapper>
       </>
     )
   }
 }
 
-const styles = {
-  dropzone: {
-    height: "150px",
-    width: "150px",
-    border: "1px dashed black",
-    borderRadius: "5px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "10px",
-  },
-}
+// const styles = {
+//   dropzone: {
+//     height: "50px",
+//     width: "50px",
+//     border: "1px dashed black",
+//     borderRadius: "5px",
+//     display: "flex",
+//     justifyContent: "center",
+//     alignItems: "center",
+//     padding: "10px",
+//   },
+// }
 
 const ConnectedProfile = (props) => (
   <AuthConsumer>
