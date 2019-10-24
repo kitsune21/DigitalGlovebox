@@ -25,6 +25,9 @@ class DocTypeForm extends Component {
       this.props.add(this.state)
     }
     this.setState({ name: '' })
+    if(this.props.isModal) {
+      this.props.handleClose();
+    }
   }
 
   render() {

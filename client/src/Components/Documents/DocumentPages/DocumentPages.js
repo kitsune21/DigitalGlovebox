@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import DocumentPageItem from './DocumentPageItem';
-import { Button } from 'semantic-ui-react';
+import { Button, Icon } from 'semantic-ui-react';
 import ConnectedDocPagesForm from './DocumentPagesForm';
 
 class DocumentPages extends Component {
@@ -22,7 +22,7 @@ class DocumentPages extends Component {
   renderPage = () => {
     const {pages, currentPage } = this.state;
     return(
-      pages.length > 0 ? <DocumentPageItem page={pages[currentPage]} /> : <ConnectedDocPagesForm document_id={this.props.doc_id} setAddPages={this.pullPages}/>
+      pages.length > 0 ? <DocumentPageItem nextPage={this.nextPage} previousPage={this.previousPage} page={pages[currentPage]} /> : <ConnectedDocPagesForm document_id={this.props.doc_id} setAddPages={this.pullPages}/>
     )
   }
 
@@ -61,11 +61,11 @@ class DocumentPages extends Component {
   render() {
     return(
       <div>
-        <h4>Pages</h4>
+        <h4>Images</h4>
         {this.renderPage()}
-        <Button onClick={() => this.previousPage()}>Previous Page</Button>
-        <Button onClick={() => this.deletePage(this.getPageID())}>X</Button>
-        <Button onClick={() => this.nextPage()}>Next Page</Button>
+        <Button onClick={() => this.previousPage()}>Previous Image</Button>
+        <Button onClick={() => this.deletePage(this.getPageID())}><Icon name='trash'/></Button>
+        <Button onClick={() => this.nextPage()}>Next Image</Button>
       </div>
     )
   }

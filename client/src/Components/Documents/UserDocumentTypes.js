@@ -4,11 +4,11 @@ import { AuthConsumer } from '../../Providers/AuthProvider';
 import { withRouter, } from 'react-router-dom';
 import DocumentItem from './DocumentItem';
 import DocTypeForm from './DocTypeForm';
-import { Button, Card, Icon } from 'semantic-ui-react';
+import { Button, Card, Icon, Modal } from 'semantic-ui-react';
 
 class UserDocumentTypes extends Component {
 
-  state = { document_types: [], editing: false }
+  state = { document_types: [], editing: false, modalOpen: false }
 
   toggleEdit = () => this.setState({ editing: !this.state.editing })
 
@@ -86,7 +86,7 @@ class UserDocumentTypes extends Component {
         }
           {
             this.renderDocs(type.id).map( doc =>
-            <Card key={doc.id} style={{width: '500px', height: '500px'}}>
+            <Card key={doc.id} style={{width: '100%'}}>
               <DocumentItem myDocument={doc} />
             </Card>
           )
@@ -109,10 +109,28 @@ class UserDocumentTypes extends Component {
     )
   }
 
+  handleOpen = () => {
+    this.setState({modalOpen: true})
+  }
+
+  handleClose = () => {
+    this.setState({modalOpen: false})
+  }
+
   render() {
     return(
       <div>
-        <DocTypeForm add={this.addDocType} />
+        <Modal
+          trigger={<Button onClick={this.handleOpen}>Add Document Type</Button>}
+          open={this.state.modalOpen}
+          onClose={this.handleClose}
+          closeIcon
+        >
+          <Modal.Header>Add Custom Document Type</Modal.Header>
+          <Modal.Content>
+            <DocTypeForm add={this.addDocType} isModal={true} handleClose={this.handleClose} />
+          </Modal.Content>
+        </Modal>
         {this.renderDocTypes()}
       </div>
     )
