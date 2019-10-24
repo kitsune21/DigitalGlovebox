@@ -14,7 +14,7 @@ class DocumentItem extends Component {
       <div>
         {
            <Modal
-            trigger={<Header>{ myDocument.name }<Icon name='edit' size='tiny' onClick={this.toggleFormOpen}/></Header>}
+            trigger={<Header>{ myDocument.name }  <Icon name='edit' size='tiny' onClick={this.toggleFormOpen}/></Header>}
             open={this.state.modalOpen}
             onClose={this.handleClose}
             closeIcon
