@@ -7,7 +7,7 @@ import ConnectedDocumentTypes from './UserDocumentTypes';
 import DocumentForm from './DocumentForm';
 import ConnectedDocPagesFrom from './DocumentPages/DocumentPagesForm';
 import styled from 'styled-components'
-import { Card, Accordion, Icon } from 'semantic-ui-react';
+import { Card, Accordion, Icon, Modal, Button, Header } from 'semantic-ui-react';
 
 const Container = styled.div`
   background-color: white;
@@ -28,6 +28,7 @@ const One = styled.div`
 
 const Two = styled.div`
   margin-left: 30%;
+  float: left;
 `
 
 const Underlined = styled.h1`
@@ -39,7 +40,8 @@ class Documents extends Component {
             document_types: [],
             addPages: false,
             addPagesDocID: 0,
-            activeIndex: 0 }
+            addDocModal: false,  
+          }
 
   handleClick = (e, titleProps) => {
     const { index } = titleProps
@@ -89,6 +91,10 @@ class Documents extends Component {
     )
   }
 
+  toggleAddDocModal = () => {
+    this.setState({ addDocModal: !this.state.addDocModal})
+  }
+
   deleteDocument = (id, doc) => {
     axios.delete(`/api/users/${this.state.user_id}/documents/${id}`, doc)
       .then( res => {
@@ -110,53 +116,37 @@ class Documents extends Component {
   }
 
 	render() {
-    const { activeIndex } = this.state
     const { auth: { user } } = this.props;
 		return(
       <div>
         <Container>
-        <One>
-        {
-          this.state.addPages ?
-            this.renderAddPages()
-          :
-            <DocumentForm user_id={user.id} add={this.addDocument}/>
-        }
-        </One>
-        <Two>
-          <Accordion>
-            <Accordion.Title
-              active={activeIndex === 0}
-              index={0}
-              onClick={this.handleClick}
+          <One>
+            <Modal
+              trigger={<Button onClick={this.toggleAddDocModal}><Icon name='plus circle'/>   Add Document</Button>}
+              open={this.state.modalOpen}
+              onClose={this.handleClose}
+              closeIcon
             >
-              <Underlined>
-                <Icon name='dropdown' />
-                My Documents
-              </Underlined>
-            </Accordion.Title>
-            <Accordion.Content active={activeIndex === 0}>
-              <DocumentList
+              <Modal.Header>Add Document</Modal.Header>
+              <Modal.Content>
+              {
+                this.state.addPages ?
+                  this.renderAddPages()
+                :
+                  <DocumentForm user_id={user.id} add={this.addDocument}/>
+              }
+              </Modal.Content>
+            </Modal>
+          </One>
+          <Two>
+            <Header>Documents</Header>
+            <p>Upload and store all of your car-related documents, including insurance, registration and service records.</p>
+            <DocumentList
               document_types={this.state.document_types}
               documents={this.state.documents}
               deleteDocument={this.deleteDocument}
               updateDocument={this.updateDocument}
-              />
-            </Accordion.Content>
-            <Accordion.Title
-               active={activeIndex === 1}
-               index={1}
-               onClick={this.handleClick}
-             >
-               <Underlined>
-                 <Icon name='dropdown' />
-                 Custom Document Types
-               </Underlined>
-             </Accordion.Title>
-             <Accordion.Content active={activeIndex === 1}>
-               <ConnectedDocumentTypes documents={this.state.documents}/>
-             </Accordion.Content>
-          </Accordion>
+            />
           </Two>
         </Container>
       </div>

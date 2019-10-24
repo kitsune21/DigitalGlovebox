@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import DocumentPages from './DocumentPages/DocumentPages';
 import DocumentForm from './DocumentForm';
-import { Icon } from 'semantic-ui-react';
+import { Button, Icon, Modal, Header } from 'semantic-ui-react';
 
 
 class DocumentItem extends Component {
@@ -12,15 +12,22 @@ class DocumentItem extends Component {
     const { myDocument, deleteDocument, updateDocument } = this.props;
     return (
       <div>
-        <p>{ myDocument.name }</p>
-        <button style={{color:'red'}} onClick={() => deleteDocument(myDocument.id)}><Icon name='trash'/></button>
-        <button style={{color:'blue'}} onClick={() => this.toggleFormOpen()}><Icon name='pencil'/></button>
         {
-          this.state.formOpen &&
-          <DocumentForm {...myDocument}
-          update={updateDocument}
-          toggleEdit={this.toggleFormOpen}
-           />
+           <Modal
+            trigger={<Header>{ myDocument.name }<Icon name='edit' size='tiny' onClick={this.toggleFormOpen}/></Header>}
+            open={this.state.modalOpen}
+            onClose={this.handleClose}
+            closeIcon
+           >
+             <Modal.Header>Edit Document:</Modal.Header>
+             <Modal.Content>
+             <Button style={{color:'red'}} onClick={() => deleteDocument(myDocument.id)}><Icon name='trash'/></Button>
+              <DocumentForm {...myDocument}
+                update={updateDocument}
+                toggleEdit={this.toggleFormOpen}
+              />
+             </Modal.Content>
+           </Modal>
         }
         <DocumentPages doc_id={myDocument.id}/>
       </div>
