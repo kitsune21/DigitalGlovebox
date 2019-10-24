@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from 'semantic-ui-react'
+import { Container, Image } from 'semantic-ui-react'
 
 const AfterAnAccident = ({}) => (
   <Container style={
@@ -8,7 +8,7 @@ const AfterAnAccident = ({}) => (
       height: 'auto',
     }
   }>
-    <img src="/emergency_list.png" alt="emergency list"/>
+    <Image src='/emergency_list.png' fluid />
   </Container>
 )
 
