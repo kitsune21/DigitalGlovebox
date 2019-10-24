@@ -10,6 +10,7 @@ import ConnectedDocuments from './Components/Documents/Documents';
 import FetchUser from './Components/Auth/FetchUser';
 import { ConnectedDashboard } from './Components/Dashboard/dashboard';
 import ProtectedRoute from './Components/Auth/ProtectedRoute';
+import AfterAnAccident from './Components/Shared/AfterAnAccident';
 import styled from 'styled-components';
 
 const AppContainer = styled.div`
@@ -31,6 +32,7 @@ const App = () => (
           <ProtectedRoute exact path="/dashboard" component={ConnectedDashboard} />
           <ProtectedRoute exact path="/documents" component={ConnectedDocuments} />
           <ProtectedRoute exact path="/profile" component={Profile} />
+          <ProtectedRoute exact path="/accident" component={AfterAnAccident} />
           <Route component={NoMatch} />
         </Switch>
       </FetchUser>
