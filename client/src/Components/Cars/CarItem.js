@@ -51,15 +51,18 @@ const CarItem = ({car, deleteCar, updateCar, toggleEditing, editing, toggleLoadi
 
       <Wrapper>
       <div>
+  
       <Title>
-      <p>{car.make} {car.model} {car.year} </p>
+      <p>{car.year} {car.make} {car.model}</p> 
+      <br/>
+      <p>Mileage: {car.mileage}  License Plate: {car.license_plate}</p>
       </Title><br />
+
       </div>
       <CarContentWrap>
       < Button style={{color:'red'}} onClick={() => deleteCar(car.id)}><Icon name='trash'/></Button>
       <Button style={{color:'blue'}} onClick={() => toggleEditing()}><Icon name='pencil'/></Button>
       </CarContentWrap>
-
      </Wrapper>
 
     </div>
