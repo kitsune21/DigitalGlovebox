@@ -20,6 +20,7 @@ export class DocumentPagesForm extends Component {
     if(!this.props.id){
       this.addPage()
       this.props.setAddPages()
+      this.props.toggleModal()
     } else {
       this.updatePage()
       this.props.toggleEdit();
@@ -58,6 +59,7 @@ export class DocumentPagesForm extends Component {
           axios.put(`/api/documents/${document_id}/document_pages/${doc_page_id}`, postFile)
           .then( res => {
             this.setState({ files: []})
+            this.props.returnNewImage(file)
           })
           .catch( res => {
             console.log(res)
@@ -78,7 +80,7 @@ export class DocumentPagesForm extends Component {
   render() {
     return(
       <Form onSubmit={this.handleSubmit}>
-        <h3>Add Document Pages</h3>
+        <h3>{this.props.id ? 'Edit Page' : 'Add Document Pages'}</h3>
         <div>
           <Dropzone
             onDrop={this.onDrop}

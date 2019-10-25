@@ -121,7 +121,7 @@ class UserDocumentTypes extends Component {
     return(
       <div>
         <Modal
-          trigger={<Button onClick={this.handleOpen}>Add Document Type</Button>}
+          trigger={<Button style={{float:'right'}} onClick={this.handleOpen}><Icon name='plus circle'/>  Add Document Type</Button>}
           open={this.state.modalOpen}
           onClose={this.handleClose}
           closeIcon

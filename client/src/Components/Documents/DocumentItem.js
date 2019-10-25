@@ -12,9 +12,10 @@ class DocumentItem extends Component {
     const { myDocument, deleteDocument, updateDocument } = this.props;
     return (
       <div>
+        
         {
            <Modal
-            trigger={<Header>{ myDocument.name }  <Icon name='edit' size='tiny' onClick={this.toggleFormOpen}/></Header>}
+            trigger={<Button style={{float:'right'}} onClick={this.toggleFormOpen}><Icon name='edit' size='small' /></Button>}
             open={this.state.modalOpen}
             onClose={this.handleClose}
             closeIcon
@@ -29,6 +30,7 @@ class DocumentItem extends Component {
              </Modal.Content>
            </Modal>
         }
+        <Header>{ myDocument.name }</Header>
         <DocumentPages doc_id={myDocument.id}/>
       </div>
     )

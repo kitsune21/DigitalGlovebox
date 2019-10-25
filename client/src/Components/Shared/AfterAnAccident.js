@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Image } from 'semantic-ui-react'
 
-const AfterAnAccident = ({}) => (
+const AfterAnAccident = () => (
   <Container style={
     {
       backgroundColor: 'white',

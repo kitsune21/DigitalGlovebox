@@ -3,11 +3,10 @@ import axios from 'axios';
 import { AuthConsumer } from '../../Providers/AuthProvider';
 import { withRouter, } from 'react-router-dom';
 import DocumentList from './DocumentList'
-import ConnectedDocumentTypes from './UserDocumentTypes';
 import DocumentForm from './DocumentForm';
 import ConnectedDocPagesFrom from './DocumentPages/DocumentPagesForm';
 import styled from 'styled-components'
-import { Card, Accordion, Icon, Modal, Button, Header } from 'semantic-ui-react';
+import { Icon, Modal, Button, Header } from 'semantic-ui-react';
 
 const Container = styled.div`
   background-color: white;
@@ -29,10 +28,6 @@ const One = styled.div`
 const Two = styled.div`
   margin-left: 30%;
   float: left;
-`
-
-const Underlined = styled.h1`
-  text-decoration: underline;
 `
 
 class Documents extends Component {
@@ -85,8 +80,9 @@ class Documents extends Component {
   renderAddPages = () => {
     return (
       <ConnectedDocPagesFrom
-      document_id={this.state.addPagesDocID}
-      setAddPages={this.setAddPages}
+        document_id={this.state.addPagesDocID}
+        setAddPages={this.setAddPages}
+        toggleModal={this.toggleAddDocModal}
       />
     )
   }
@@ -123,8 +119,8 @@ class Documents extends Component {
           <One>
             <Modal
               trigger={<Button onClick={this.toggleAddDocModal}><Icon name='plus circle'/>   Add Document</Button>}
-              open={this.state.modalOpen}
-              onClose={this.handleClose}
+              open={this.state.addDocModal}
+              onClose={this.toggleAddDocModal}
               closeIcon
             >
               <Modal.Header>Add Document</Modal.Header>

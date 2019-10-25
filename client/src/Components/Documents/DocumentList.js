@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import DocumentItem from './DocumentItem';
 import axios from 'axios';
 import ConnectedDocumentTypes from './UserDocumentTypes';
-import { Card, Accordion, Icon, Tab } from 'semantic-ui-react';
+import { Card, Tab } from 'semantic-ui-react';
 
 class DocumentList extends Component {
 

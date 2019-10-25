@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const Wrapper = styled.section`
    width: 350px;
-   height: 300px;
+   height: 100%;
    position: relative;
    left: 36%;
    `;
@@ -15,6 +15,7 @@ class CarForm extends Component {
 
  componentDidMount() {
    if (this.props.id) {
+     console.log(this.props.car.license_plate)
      this.setState({ year: this.props.car.year, make: this.props.car.make, model: this.props.car.model, mileage: this.props.car.mileage, VIN: this.props.car.vin, license_plate: this.props.car.license_plate})
    }
  }
@@ -59,23 +60,18 @@ class CarForm extends Component {
 
  setCarInfo = (data) => {
   let carData = data.Results;
+  console.log(data)
   carData.forEach( info => {
-    if(info.Variable === "Make"){
-      this.setState({make: info.Value})
-    } 
     switch(info.Variable) {
       case "Make":
-        this.setState({Make: info.Value})
+        this.setState({make: info.Value})
         break;
       case "Model Year":
-        this.setState({Year: info.Value})
+        this.setState({year: info.Value})
         break;
       case "Model":
-        this.setState({Model: info.Value})
+        this.setState({model: info.Value})
         break; 
-      case "license_plate":
-        this.setState({license_plate: info.Value})
-        break;
       default:
         break;
     }
@@ -120,11 +116,13 @@ class CarForm extends Component {
  }
 
  render() {
-   const { year, make, model, mileage, vin, license_plate } = this.state
+   const { year, make, model, mileage, license_plate } = this.state
    return (
      <>
-     
-      <Modal 
+      {
+        this.props.id ? null 
+        :
+        <Modal 
         trigger={<Button onClick={this.handleOpen}>Add By VIN #</Button>}
         open={this.state.modalOpen}
         onClose={this.handleClose}
@@ -137,10 +135,11 @@ class CarForm extends Component {
           {!this.state.loading ? this.renderVINForm() : this.renderVINLoader()}
         </Modal.Content>
         </Modal>
-
+      }
        <Wrapper>
 
         <Form inverted onSubmit={this.handleSubmit}>
+          <Button>Close</Button>
           <Form.Input
             required
             type='number'
@@ -163,7 +162,7 @@ class CarForm extends Component {
             <Form.Input
               required
             placeholder='Model'
-            label='model'
+            label='Model'
             name='model'
             value={model}
             onChange={this.handleChange}
@@ -172,20 +171,19 @@ class CarForm extends Component {
             <Form.Input
               required
               type='number'
-            placeholder='Mileage'
-            label='mileage'
-            name='mileage'
-            value={mileage}
-            onChange={this.handleChange}
+              placeholder='Mileage'
+              label='Mileage'
+              name='mileage'
+              value={mileage}
+              onChange={this.handleChange}
             />
 
             <Form.Input
-              type='number'
-            placeholder='license_plate'
-            label='license_plate'
-            name='license_plate'
-            value={license_plate}
-            onChange={this.handleChange}
+              placeholder='license_plate'
+              label='License Plate'
+              name='license_plate'
+              value={license_plate}
+              onChange={this.handleChange}
             />
 
             <Button type='submit'>Submit</Button>

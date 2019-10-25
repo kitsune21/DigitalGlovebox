@@ -4,10 +4,7 @@ import axios from 'axios';
 import { AuthConsumer } from '../../Providers/AuthProvider';
 import CarList from '../Cars/CarList';
 import CarForm from '../Cars/CarForm';
-import styled from 'styled-components';
-
-const Button = styled.button`
-   color: ##1C2226;`
+import { Button } from 'semantic-ui-react';
 
 class Dashboard extends Component {
   state = { cars: [], adding: false, editing: false};
