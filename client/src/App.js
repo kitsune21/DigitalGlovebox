@@ -18,7 +18,8 @@ const AppContainer = styled.div`
   background: #1C2226;
   color: #ffffff;
   width: 100%;
-  height: 100vh;`
+  height: 100%;
+  min-height:850px;`
 
 const App = () => (
   <>

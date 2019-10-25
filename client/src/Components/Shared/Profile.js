@@ -11,7 +11,7 @@ const FormWrapper = styled.div`
   height: 450px;
   margin-top: 35px;
   margin-bottom: 25px;
-  margin-left: 550px;`
+  margin-left: 25%;`
 
 
 class Profile extends Component {
