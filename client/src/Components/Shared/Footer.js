@@ -4,10 +4,12 @@ import styled from 'styled-components'
 const FooterStyle  = styled.div`
   background: #1C2226;
   color: #ffffff;
-  // position: fixed;
   text-align: center;
-  bottom: 5;
-  height: 100%;`
+  vertical-align: bottom;
+  position: relative;
+  padding: 30px 50px;
+  clear: both;`
+
 
 class Footer extends React.Component {
   render(){

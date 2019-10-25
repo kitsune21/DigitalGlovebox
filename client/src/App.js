@@ -17,7 +17,8 @@ import styled from 'styled-components';
 const AppContainer = styled.div`
   background: #1C2226;
   color: #ffffff;
-  height: 100%;`
+  width: 100%;
+  height: 100vh;`
 
 const App = () => (
   <>
