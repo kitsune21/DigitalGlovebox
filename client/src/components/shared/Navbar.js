@@ -45,43 +45,20 @@ class Navbar extends React.Component {
     } else {
       return (
         <Menu.Menu position='right'>
-          <Link to='/dashboard'>
+          <Link to='/login'>
             <Menu.Item
               position='right'
-              name='dashboard'
-              id='dashboard'
-              active={this.props.location.pathname === '/'}
+              name='login'
+              id='login'
+              active={location.pathname === '/login'}
             />
           </Link>
-          <Link to='/documents'>
+          <Link to='/register'>
             <Menu.Item
               position='right'
-              name='documents'
-              id='documents'
-              active={this.props.location.pathname === '/documents'}
-            />
-            </Link>
-          <Link to='/accident'>
-            <Menu.Item
-              name='accident'
-              id='accident'
-              active={this.props.location.pathname === '/accident'}
-            />
-          </Link>
-          <Link to='/contact'>
-            <Menu.Item
-              position='right'
-              name='contact us'
-              id='contact'
-              active={this.props.location.pathname === '/contact'}
-            />
-          </Link>
-          <Link to='/profile'>
-            <Menu.Item
-              position='right'
-              name='profile'
-              id='profile'
-              active={location.pathname === '/profile'}
+              name='register'
+              id='register'
+              active={location.pathname === '/register'}
             />
           </Link>
           

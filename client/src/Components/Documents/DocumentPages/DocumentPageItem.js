@@ -4,10 +4,22 @@ import { Icon, Button, Modal } from 'semantic-ui-react';
 
 class DocumentPageItem extends Component {
 
-  state = { editing: false }
+  state = { editing: false, newImage: '' }
 
   toggleEditing = () => {
     this.setState({editing: !this.state.editing})
+  }
+
+  returnNewImage = (newImage) => {
+    this.setState({newImage: newImage})
+  }
+
+  imageSource = (page) => {
+    if(this.state.newImage) {
+      return this.state.newImage
+    } else {
+      return page.front_img
+    }
   }
 
   renderItem = () => {
@@ -15,28 +27,48 @@ class DocumentPageItem extends Component {
     return (
       <div>
         <Modal
-          trigger={<img height='200px' src={page.front_img} alt='page' onClick={this.handleOpen} />}
+          trigger={<img height='200px' src={this.imageSource(page)} alt='page' onClick={this.handleOpen} />}
           open={this.state.modalOpen}
           onClose={this.handleClose}
           closeIcon
         >
           <Modal.Header>Images</Modal.Header>
           <Modal.Content>
-            <img width='100%' src={page.front_img} alt='page' />
-            <Button onClick={() => this.props.previousPage()}>Previous Image</Button>
-            <Button onClick={() => this.props.nextPage()}>Next Image</Button>
+            {this.renderEditForm(page)}
           </Modal.Content>
+          {this.renderModal()}
         </Modal>
       </div>
     )
   }
 
+  renderEditForm = (page) => {
+    if(this.state.editing) {
+      return(
+        <ConnectedDocPagesForm id={page.id} document_id={page.document_id} doc_page_id={page.id} toggleEdit={this.toggleEditing} returnNewImage={this.returnNewImage}/>
+      )
+    } else {
+      return null
+    }
+  }
+
+  renderModal = (editing) => {
+    const { page } = this.props;
+    return(
+      <Modal.Content>
+        <Button onClick={() => this.props.previousPage()}>Previous Image</Button>
+        <Button onClick={() => this.props.nextPage()}>Next Image</Button>
+        <Button style={{float:'right'}} onClick={() => this.props.deletePage(this.props.page.id)}><Icon name='trash'/></Button>
+        <Button style={{float:'right'}} onClick={() => this.toggleEditing()}><Icon name='picture'/></Button>
+        <img width='100%' src={page.front_img} alt='page' />
+      </Modal.Content>
+    )
+  }
+
   render() {
-    const { editing } = this.state
     return(
       <div>
-        <Button onClick={() => this.toggleEditing()}><Icon name='edit'/></Button>
-        { editing ? <ConnectedDocPagesForm id={this.props.page.id} document_id={this.props.page.document_id} doc_page_id={this.props.page.id} toggleEdit={this.toggleEditing}/> : this.renderItem() }
+        {this.renderItem()}
       </div>
     )
   }

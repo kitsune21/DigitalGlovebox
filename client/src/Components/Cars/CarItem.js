@@ -1,13 +1,8 @@
 import React from 'react';
 import CarForm from './CarForm';
 import styled from 'styled-components';
-import { Icon } from 'semantic-ui-react';
+import { Button, Icon } from 'semantic-ui-react';
 
-const AppContainer = styled.div`
-  background: #1C2226;
-  color: #ffffff;
-  font: #ffffff;
-  `
 const Title = styled.h1`
   font-size: 1.2em;
   text-align: center;
@@ -18,29 +13,11 @@ const Wrapper = styled.section`
 border-radius:5px;
   background: #F8F8F8;
   margin: 0 auto;
-  margin-bottom:2em;
   border: 3px 'green';
-  width: 350px;
-  height: 100px;
+  width: 30%;
+  height: 150px;
   position: relative;
 `;
-
-const CarContentWrap = styled.section`
-position: relative;
-left: 45%;
-  margin-left: -50px;
-`;
-
-
-const Button = styled.button`
-  background: white;
-  margin: 5px;
-  text-align: center;
-  color: black;
-  font-size: 16px;
-  :disabled {
-    opacity: 0.4;
-  }`;
 
 
 
@@ -56,13 +33,10 @@ const CarItem = ({car, deleteCar, updateCar, toggleEditing, editing, toggleLoadi
       <p>{car.year} {car.make} {car.model}</p> 
       <br/>
       <p>Mileage: {car.mileage}  License Plate: {car.license_plate}</p>
+      <Button style={{color:'red', float:'right'}} onClick={() => deleteCar(car.id)}><Icon name='trash'/></Button>
+      <Button style={{color:'blue', float:'right'}} onClick={() => toggleEditing()}><Icon name='pencil'/></Button>
       </Title><br />
-
       </div>
-      <CarContentWrap>
-      < Button style={{color:'red'}} onClick={() => deleteCar(car.id)}><Icon name='trash'/></Button>
-      <Button style={{color:'blue'}} onClick={() => toggleEditing()}><Icon name='pencil'/></Button>
-      </CarContentWrap>
      </Wrapper>
 
     </div>

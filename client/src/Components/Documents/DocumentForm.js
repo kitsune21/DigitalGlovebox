@@ -71,7 +71,6 @@ class DocumentForm extends Component {
    const isEnabled = name.length > 0 && doc_type_id !== '';
    return(
     <Form onSubmit={this.handleSubmit}>
-      <h3>Add Document</h3>
     <Form.Input
       required
       placeholder='Name'
@@ -81,14 +80,18 @@ class DocumentForm extends Component {
       onChange={this.handleChange}
     />
 
+    {
+      this.props.id ? null 
+      :
       <Form.Select
-      required
-      fluid
-      label='Docoument Type'
-      placeholder='Document Type'
-      options={this.setDocTypes()}
-      onChange={this.handleSelection}
-      />
+        required
+        fluid
+        label='Docoument Type'
+        placeholder='Document Type'
+        options={this.setDocTypes()}
+        onChange={this.handleSelection}
+      /> 
+    }
       <Button onClick={() => this.validationAlerts} disabled={!isEnabled} type='submit'>Submit</Button>
     </Form>
    )

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { AuthConsumer, } from "../../Providers/AuthProvider";
-import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
-import { Form, Icon } from "semantic-ui-react";
+import { Icon } from "semantic-ui-react";
 
 const FormWrapper = styled.div`
   align: 'center';
